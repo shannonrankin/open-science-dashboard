@@ -15,7 +15,6 @@
 #                            - Dashboards
 #                            - Data Management
 #                            - Project Management
-#                            - community building
 #   keywords    (list)     One or more keywords. Current options:
 #                            - visualizations
 #                            - GitHub
@@ -23,6 +22,7 @@
 #                            - r
 #                            - cloud
 #                            - template
+#                            - tutorials
 #   image       (string)   Either a bare filename (e.g. my-project.png) stored
 #                          in content/card-images/, OR a full external URL
 #                          (e.g. https://example.com/img.png). Leave blank ""
@@ -40,11 +40,11 @@ examples:
   - id: 1
     title: "NOAA Fisheries PAM Open Science Site"
     description: >
-      A website with tutorials, information, resources to facilitate adoption of open science practices, designed for NOAA Fisheries PAM-Strategic Initiative.
+      A website with open science practices, designed for NOAA Fisheries PAM teams.
     url: "https://nmfs-ost.github.io/PAM-OpenScience/"
     tools:
       - community building
-      - website
+      - Website
       - Data Management
       - Project Management
     keywords:
@@ -58,11 +58,12 @@ examples:
   - id: 2
     title: "NOAA Fisheries PAM Research Compendium Template"
     description: >
-      A template for creating a research compendium (a digital archive of for the components of a research project)
+      A research compendium template (a digital archive of for 
+      the components of a research project)
       url: "https://sael-swfsc.github.io/PAM_template_ResearchCompendium/"
     tools:
       - community building
-      - website
+      - Website
       - Project Management
     keywords:
       - GitHub
@@ -71,11 +72,12 @@ examples:
     image: "pam-research-compendium.png"
     author: "NMFS-PAM-SI"
     date_added: "2026-02-24"
-    
- - id: 3
+   
+  - id: 3
     title: "NOAA Fisheries PAM Lab Manual Template"
     description: >
-      A template for developing a Lab Manual for NOAA Fisheries PAM teams. Output to a website.
+      A template for developing a Lab Manual for NOAA Fisheries PAM teams. 
+      Output to a website.
     url: "https://github.com/nmfs-ost/PAM_template_lab_manual"
     tools:
       - Lab Manual
