@@ -72,7 +72,7 @@ examples:
     author: "NMFS-PAM-SI"
     date_added: "2026-02-24"
     
-   - id: 3
+ - id: 3
     title: "NOAA Fisheries PAM Lab Manual Template"
     description: >
       A template for developing a Lab Manual for NOAA Fisheries PAM teams. Output to a website.
