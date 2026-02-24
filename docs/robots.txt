@@ -1,0 +1,1 @@
+Sitemap: https://github.com/shannonrankin/open-science-dashboard/sitemap.xml

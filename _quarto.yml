@@ -1,6 +1,6 @@
 project: 
   type: website
-  output-dir: docs
+  output-dir: _site
 
 website: 
   page-navigation: true
@@ -51,6 +51,8 @@ format:
     code-overflow: wrap
     toc: true
 
+resources:
+  - content/card-images/*
 
 filters:
   - include-files.lua
