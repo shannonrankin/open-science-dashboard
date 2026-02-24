@@ -24,6 +24,10 @@ jobs:
           tinytex: true 
           # uncomment below and fill to pin a version
           # version: 0.9.600
+      - name: Install dependencies with renv
+        uses: r-lib/actions/setup-renv@v2
+        with:
+          cache-version: 1
       
       # add software dependencies here
 

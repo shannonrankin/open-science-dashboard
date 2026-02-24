@@ -38,6 +38,57 @@
 examples:
 
   - id: 1
+    title: "NOAA Fisheries PAM Open Science Site"
+    description: >
+      A website with tutorials, information, resources to facilitate adoption of open science practices, designed for NOAA Fisheries PAM-Strategic Initiative.
+    url: "https://nmfs-ost.github.io/PAM-OpenScience/"
+    tools:
+      - community building
+      - website
+      - Data Management
+      - Project Management
+    keywords:
+      - GitHub
+      - r
+      - template
+    image: "pam-open-science-site.png"
+    author: "NMFS-PAM-SI"
+    date_added: "2026-02-24"
+    
+  - id: 2
+    title: "NOAA Fisheries PAM Research Compendium Template"
+    description: >
+      A template for creating a research compendium (a digital archive of for the components of a research project)
+      url: "https://sael-swfsc.github.io/PAM_template_ResearchCompendium/"
+    tools:
+      - community building
+      - website
+      - Project Management
+    keywords:
+      - GitHub
+      - r
+      - tutorials
+    image: "pam-research-compendium.png"
+    author: "NMFS-PAM-SI"
+    date_added: "2026-02-24"
+    
+   - id: 3
+    title: "NOAA Fisheries PAM Lab Manual Template"
+    description: >
+      A template for developing a Lab Manual for NOAA Fisheries PAM teams. Output to a website.
+    url: "https://github.com/nmfs-ost/PAM_template_lab_manual"
+    tools:
+      - Lab Manual
+      - website
+      - Project Management
+    keywords:
+      - GitHub
+      - r
+      - tutorials
+    image: "pam-lab-manual-template.png"
+    author: "NMFS-PAM-SI"
+    date_added: "2026-02-24"   
+  - id: 4
     title: "The Turing Way"
     description: >
       A community-built, collaborative guide to reproducible, ethical, and
@@ -56,7 +107,7 @@ examples:
     author: "The Turing Way Community"
     date_added: "2024-01-15"
 
-  - id: 2
+  - id: 5
     title: "rOpenSci Developer Guide"
     description: >
       Community-developed best practices for open science R package development,
@@ -74,7 +125,7 @@ examples:
     author: "rOpenSci"
     date_added: "2024-01-15"
 
-  - id: 3
+  - id: 6
     title: "Quarto Gallery"
     description: >
       Showcase of websites, dashboards, reports, and presentations built with
@@ -94,7 +145,7 @@ examples:
     author: "Posit PBC"
     date_added: "2024-02-10"
 
-  - id: 4
+  - id: 7
     title: "DMPTool"
     description: >
       Web-based tool that guides researchers through creating data management
@@ -111,7 +162,7 @@ examples:
     author: "University of California Curation Center"
     date_added: "2024-03-01"
 
-  - id: 5
+  - id: 8
     title: "GitHub Community Health Files"
     description: >
       Documentation and templates for standardising community health files
@@ -128,7 +179,7 @@ examples:
     author: "GitHub"
     date_added: "2024-03-15"
 
-  - id: 6
+  - id: 9
     title: "Observable Framework"
     description: >
       Static-site framework for building fast, beautiful data dashboards and
