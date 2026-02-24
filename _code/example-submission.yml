@@ -1,0 +1,145 @@
+name: "📬 Submit a New Dashboard Example"
+description: "Suggest a resource, project, or tool to be added to the Examples Dashboard."
+title: "[EXAMPLE SUBMISSION]: "
+labels:
+  - "example-submission"
+  - "needs-review"
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 👋 Thanks for contributing!
+
+        Fill out the form below to suggest a new example for the dashboard.
+        An admin will review your submission and, if accepted, it will be
+        added to the next site build.
+
+        > **Tip:** The more detail you provide, the faster your submission
+        > can be reviewed and added!
+
+        ---
+
+  - type: input
+    id: title
+    attributes:
+      label: "Short Title"
+      description: "A brief, descriptive title for this example (max ~60 characters)."
+      placeholder: "e.g., The Turing Way Handbook"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "Short Description"
+      description: "A 1–3 sentence description of the resource and what makes it useful."
+      placeholder: "e.g., A community-built guide to reproducible, ethical, and collaborative data science…"
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: "URL / Link"
+      description: "The primary public URL for this example."
+      placeholder: "https://example.com"
+    validations:
+      required: true
+
+  - type: input
+    id: author
+    attributes:
+      label: "Author / Organisation"
+      description: "Who created or maintains this resource?"
+      placeholder: "e.g., rOpenSci, Posit PBC, Jane Smith"
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ### 🏷️ Categorisation
+
+        Select the categories that best describe this example.
+        Tick as many as apply — **you can also suggest new ones** in the
+        free-text fields below each checklist.
+
+  - type: checkboxes
+    id: tools
+    attributes:
+      label: "Tool Type(s)"
+      description: "What kind of resource is this? Tick all that apply."
+      options:
+        - label: "Lab Manual"
+        - label: "Website"
+        - label: "Reproducible Reports"
+        - label: "Dashboards"
+        - label: "Data Management"
+        - label: "Project Management"
+        - label: "community building"
+
+  - type: input
+    id: tools_new
+    attributes:
+      label: "New Tool Type(s) — not in the list above?"
+      description: "Comma-separated. Leave blank if not applicable."
+      placeholder: "e.g., Podcast, Interactive Tutorial"
+
+  - type: checkboxes
+    id: keywords
+    attributes:
+      label: "Keyword(s)"
+      description: "What topics or technologies does this example feature? Tick all that apply."
+      options:
+        - label: "visualizations"
+        - label: "GitHub"
+        - label: "python"
+        - label: "r"
+        - label: "cloud"
+        - label: "template"
+
+  - type: input
+    id: keywords_new
+    attributes:
+      label: "New Keyword(s) — not in the list above?"
+      description: "Comma-separated. Leave blank if not applicable."
+      placeholder: "e.g., machine learning, open data, docker"
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ### 🖼️ Image (optional)
+
+  - type: input
+    id: image_url
+    attributes:
+      label: "Screenshot or Logo URL"
+      description: |
+        A link to a screenshot, thumbnail, or logo for this example.
+        Admins will download it and add it to the repository.
+        Leave blank to use the default placeholder image on the card.
+      placeholder: "https://example.com/screenshot.png"
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: "Additional Notes (optional)"
+      description: "Anything else admins should know?"
+
+  - type: markdown
+    attributes:
+      value: "---"
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "Submission Checklist"
+      options:
+        - label: "I've checked that this example is not already in the dashboard."
+          required: true
+        - label: "The URL is publicly accessible."
+          required: true
+        - label: "I understand that submissions are reviewed before being published."
+          required: true

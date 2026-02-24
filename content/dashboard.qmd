@@ -1,0 +1,342 @@
+---
+title: "Examples Dashboard"
+format:
+  html:
+    page-layout: full
+    toc: false
+    css: ../dashboard.css
+    include-in-header:
+      text: |
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+Need Instructions? [Here you go!](https://shannonrankin.github.io/pathways-flowchart/content/instructions.html)
+```{r}
+#| label: load-data
+
+library(tidyverse)
+library(here)
+library(yaml)
+library(jsonlite)
+
+# ── PATH CONFIGURATION ───────────────────────────────────────────────────────
+# Update these if you ever reorganise the repository structure.
+#
+#   path_data    — location of examples.yaml, resolved from project root by here()
+#   img_folder   — image src prefix as seen by the BROWSER once the site is rendered.
+#                  dashboard.qmd lives in content/, and card-images/ is a sibling
+#                  folder at content/card-images/. Quarto copies both to the same
+#                  output directory, so the browser resolves "card-images/foo.png"
+#                  relative to the HTML file — correct for content/card-images/.
+#                  If you move dashboard.qmd out of content/, adjust this prefix.
+#   img_default  — fallback image used when no image field is set in examples.yaml
+#   submit_url   — GitHub new-issue URL (replace YOUR-ORG/YOUR-REPO before deploying)
+#
+path_data   <- here("_code", "examples.yaml")
+img_folder  <- "card-images"
+img_default <- paste0(img_folder, "/placeholder.svg")
+submit_url  <- paste0(
+  "https://github.com/shannonrankin/pathways-flowchart",
+  "/issues/new?template=example-submission.yml"
+)
+
+# ── Load examples from YAML ──────────────────────────────────────────────────
+raw      <- read_yaml(path_data)
+examples <- raw$examples
+
+# ── Normalise: ensure list fields are always character vectors ────────────────
+`%||%` <- function(x, y) if (is.null(x)) y else x
+
+examples <- map(examples, function(ex) {
+  ex$tools    <- as.character(ex$tools    %||% character(0))
+  ex$keywords <- as.character(ex$keywords %||% character(0))
+
+  # ── Image path ────────────────────────────────────────────────────────────
+  # examples.yaml accepts either:
+  #   - A bare filename:  "my-project.png"
+  #     -> prefixed with img_folder -> "card-images/my-project.png"
+  #     -> file must exist in content/card-images/
+  #   - A full external URL: "https://example.com/screenshot.png"
+  #     -> used as-is, no local file needed
+  #   - Blank / missing -> falls back to img_default (placeholder)
+  img_val <- trimws(ex$image %||% "")
+  ex$image <- if (img_val == "") {
+    img_default
+  } else if (startsWith(img_val, "http://") || startsWith(img_val, "https://")) {
+    img_val
+  } else {
+    paste0(img_folder, "/", img_val)
+  }
+
+  # Pipe-separate multi-value fields for easy OJS splitting
+  ex$tools_str    <- paste(ex$tools,    collapse = "|")
+  ex$keywords_str <- paste(ex$keywords, collapse = "|")
+  ex
+})
+
+# ── Derive master lists for dropdown menus (sorted, deduped) ─────────────────
+all_tools <- examples |>
+  map("tools") |>
+  unlist() |>
+  discard(~ is.na(.) | . == "") |>
+  unique() |>
+  sort()
+
+all_keywords <- examples |>
+  map("keywords") |>
+  unlist() |>
+  discard(~ is.na(.) | . == "") |>
+  unique() |>
+  sort()
+
+# ── Flatten to data frame for JSON serialisation ──────────────────────────────
+examples_df <- map_dfr(examples, \(ex) tibble(
+  id          = as.integer(ex$id          %||% NA_integer_),
+  title       = as.character(ex$title       %||% ""),
+  description = as.character(ex$description %||% ""),
+  url         = as.character(ex$url         %||% ""),
+  tools       = as.character(ex$tools_str),
+  keywords    = as.character(ex$keywords_str),
+  image       = as.character(ex$image),
+  author      = as.character(ex$author      %||% ""),
+  date_added  = as.character(ex$date_added  %||% "")
+))
+
+# ── Pass everything to OJS ───────────────────────────────────────────────────
+ojs_define(
+  r_examples     = examples_df,
+  r_all_tools    = all_tools,
+  r_all_keywords = all_keywords,
+  r_submit_url   = submit_url
+)
+```
+
+```{ojs}
+//| label: data
+
+// Receive data injected from R.
+// transpose() converts a columnar data-frame object → array of row-objects.
+examples  = transpose(r_examples)
+allTools  = r_all_tools
+allKws    = r_all_keywords
+submitUrl = r_submit_url
+```
+
+```{ojs}
+//| label: header
+
+html`
+<div class="dash-header">
+  <div class="dash-header-inner">
+    <div class="dash-eyebrow">Resource Library</div>
+    <h1 class="dash-title">Examples Dashboard</h1>
+    <p class="dash-subtitle">
+      Discover community-contributed examples across tools and topics.
+      Filter below, or
+      <a href="${submitUrl}" target="_blank" rel="noopener" class="submit-link">
+        submit your own ↗
+      </a>
+    </p>
+  </div>
+</div>`
+```
+
+```{ojs}
+//| label: controls
+
+// ── Keyword search ────────────────────────────────────────────────────────────
+viewof rawSearch = Inputs.text({
+  placeholder: "Search by title, description, author…",
+  label: null,
+  submit: false,
+  attributes: { "aria-label": "Search examples" }
+})
+
+// ── Tools multi-select ────────────────────────────────────────────────────────
+viewof rawTools = Inputs.select(allTools, {
+  label: "Filter by Tool",
+  multiple: true,
+  size: Math.min(allTools.length, 8),
+  attributes: { "aria-label": "Filter by tool type" }
+})
+
+// ── Keywords multi-select ─────────────────────────────────────────────────────
+viewof rawKeywords = Inputs.select(allKws, {
+  label: "Filter by Keyword",
+  multiple: true,
+  size: Math.min(allKws.length, 8),
+  attributes: { "aria-label": "Filter by keyword" }
+})
+```
+
+```{ojs}
+//| label: filtering
+
+// Reactive state derived from inputs
+selectedTools    = Array.from(rawTools)
+selectedKeywords = Array.from(rawKeywords)
+searchQuery      = rawSearch.toLowerCase().trim()
+
+// Filter examples — OR logic within tools, OR logic within keywords
+filtered = examples.filter(ex => {
+  // 1. Text search across title, description, author, tags
+  const textMatch =
+    !searchQuery ||
+    ex.title.toLowerCase().includes(searchQuery) ||
+    ex.description.toLowerCase().includes(searchQuery) ||
+    (ex.author || "").toLowerCase().includes(searchQuery) ||
+    ex.tools.toLowerCase().includes(searchQuery) ||
+    ex.keywords.toLowerCase().includes(searchQuery)
+
+  // 2. Tools filter: passes if no tools selected, OR example has ≥1 match
+  const exTools  = ex.tools ? ex.tools.split("|").map(t => t.trim()) : []
+  const toolMatch =
+    selectedTools.length === 0 ||
+    selectedTools.some(t => exTools.includes(t))
+
+  // 3. Keywords filter: same OR logic
+  const exKws   = ex.keywords ? ex.keywords.split("|").map(k => k.trim()) : []
+  const kwMatch =
+    selectedKeywords.length === 0 ||
+    selectedKeywords.some(k => exKws.includes(k))
+
+  return textMatch && toolMatch && kwMatch
+})
+```
+
+```{ojs}
+//| label: clear-helper
+
+// clearInput(viewofNode, value)
+// ─────────────────────────────
+// In OJS, viewof bindings are constants — you cannot reassign them with =.
+// The correct way to reset an input programmatically is to mutate the
+// underlying DOM element directly and then dispatch an "input" event so that
+// OJS's reactive runtime picks up the new value.
+//
+// For Inputs.text  → set .value on the <input> child
+// For Inputs.select (multiple) → deselect every <option> in the <select> child
+
+function clearText(viewofEl) {
+  const input = viewofEl.querySelector("input")
+  if (input) { input.value = ""; input.dispatchEvent(new Event("input", { bubbles: true })) }
+}
+
+function clearSelect(viewofEl) {
+  const select = viewofEl.querySelector("select")
+  if (select) {
+    Array.from(select.options).forEach(o => { o.selected = false })
+    select.dispatchEvent(new Event("input", { bubbles: true }))
+  }
+}
+```
+
+```{ojs}
+//| label: results-bar
+
+html`
+<div class="results-bar">
+  <span class="results-count">
+    ${filtered.length === examples.length
+      ? `Showing all <strong>${examples.length}</strong> examples`
+      : `Showing <strong>${filtered.length}</strong> of ${examples.length} examples`}
+  </span>
+  ${(selectedTools.length > 0 || selectedKeywords.length > 0 || searchQuery)
+    ? html`<button class="clear-btn" onclick=${() => {
+        clearText(viewof rawSearch)
+        clearSelect(viewof rawTools)
+        clearSelect(viewof rawKeywords)
+      }}>✕ Clear all filters</button>`
+    : ""}
+</div>`
+```
+
+```{ojs}
+//| label: cards
+
+// ── Tag renderer ──────────────────────────────────────────────────────────────
+function renderTag(label, type) {
+  return html`<span class="tag tag-${type}">${label}</span>`
+}
+
+// ── Card renderer ──────────────────────────────────────────────────────────────
+function renderCard(ex) {
+  const toolTags = ex.tools
+    ? ex.tools.split("|").map(t => renderTag(t.trim(), "tool"))
+    : []
+  const kwTags = ex.keywords
+    ? ex.keywords.split("|").map(k => renderTag(k.trim(), "keyword"))
+    : []
+
+  const hasImage = ex.image &&
+    !ex.image.endsWith("/") &&
+    ex.image !== ""
+
+  return html`
+    <article class="ex-card">
+      <div class="card-img-wrap ${hasImage ? "" : "card-img-placeholder"}">
+        ${hasImage
+          ? html`<img
+               src="${ex.image}"
+               alt="${ex.title}"
+               class="card-img"
+               loading="lazy"
+               onerror="this.parentElement.classList.add('card-img-placeholder'); this.remove()"
+             />`
+          : html`<span class="placeholder-icon" aria-hidden="true">◈</span>`}
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">
+          <a href="${ex.url}" target="_blank" rel="noopener">${ex.title}</a>
+        </h3>
+        <p class="card-desc">${ex.description}</p>
+        ${ex.author
+          ? html`<p class="card-author">by ${ex.author}</p>`
+          : ""}
+        <div class="card-tags">
+          ${toolTags}
+          ${kwTags}
+        </div>
+      </div>
+    </article>`
+}
+
+// ── Render grid or empty state ─────────────────────────────────────────────────
+filtered.length === 0
+  ? html`
+    <div class="empty-state">
+      <div class="empty-icon" aria-hidden="true">◈</div>
+      <p>No examples match your current filters.</p>
+      <p>
+        <a href="${submitUrl}" target="_blank" rel="noopener">
+          Know one that should be here? Submit it ↗
+        </a>
+      </p>
+    </div>`
+  : html`<div class="card-grid">${filtered.map(renderCard)}</div>`
+```
+
+```{ojs}
+//| label: submit-cta
+
+html`
+<div class="submit-cta">
+  <div class="submit-cta-inner">
+    <div class="submit-icon" aria-hidden="true">✦</div>
+    <h2>Know a great example?</h2>
+    <p>
+      Contributions from the community keep this dashboard growing.
+      Submit a resource using our GitHub Issue template — an admin will
+      review it and add it to the next site build.
+    </p>
+    <a href="${submitUrl}" target="_blank" rel="noopener" class="submit-btn">
+      Submit an Example ↗
+    </a>
+  </div>
+</div>`
+```

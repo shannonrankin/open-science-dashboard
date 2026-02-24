@@ -1,0 +1,147 @@
+---
+# Examples Dashboard Data
+# ─────────────────────────────────────────────────────────────────────────────
+# Each entry is one card on the dashboard.
+#
+# Fields:
+#   id          (integer)  Unique identifier. Increment from the last entry.
+#   title       (string)   Short title shown on the card (~60 chars max).
+#   description (string)   1–3 sentence description of the resource.
+#   url         (string)   Full public URL to the example.
+#   tools       (list)     One or more tool categories. Current options:
+#                            - Lab Manual
+#                            - Website
+#                            - Reproducible Reports
+#                            - Dashboards
+#                            - Data Management
+#                            - Project Management
+#                            - community building
+#   keywords    (list)     One or more keywords. Current options:
+#                            - visualizations
+#                            - GitHub
+#                            - python
+#                            - r
+#                            - cloud
+#                            - template
+#   image       (string)   Either a bare filename (e.g. my-project.png) stored
+#                          in content/card-images/, OR a full external URL
+#                          (e.g. https://example.com/img.png). Leave blank ""
+#                          to show the placeholder image.
+#   author      (string)   Person or organisation who created it.
+#   date_added  (string)   ISO date (YYYY-MM-DD). For internal tracking.
+#
+# To add a new entry: copy an existing block, paste at the bottom,
+# increment the id, and fill in the fields. New tools/keywords you add
+# here will automatically appear in the dashboard dropdowns on next render.
+# ─────────────────────────────────────────────────────────────────────────────
+
+examples:
+
+  - id: 1
+    title: "The Turing Way"
+    description: >
+      A community-built, collaborative guide to reproducible, ethical, and
+      inclusive data science. Covers version control, project design,
+      communication, and collaboration best practices.
+    url: "https://the-turing-way.netlify.app/"
+    tools:
+      - Reproducible Reports
+      - Project Management
+    keywords:
+      - GitHub
+      - r
+      - python
+      - template
+    image: "the-turing-way.png"
+    author: "The Turing Way Community"
+    date_added: "2024-01-15"
+
+  - id: 2
+    title: "rOpenSci Developer Guide"
+    description: >
+      Community-developed best practices for open science R package development,
+      peer review, and software engineering. An exemplary open lab manual for
+      a software-focused research community.
+    url: "https://devguide.ropensci.org/"
+    tools:
+      - Lab Manual
+      - community building
+    keywords:
+      - r
+      - GitHub
+      - template
+    image: "ropensci-labmanual.png"
+    author: "rOpenSci"
+    date_added: "2024-01-15"
+
+  - id: 3
+    title: "Quarto Gallery"
+    description: >
+      Showcase of websites, dashboards, reports, and presentations built with
+      Quarto. An excellent reference for seeing what is possible across output
+      formats and disciplines.
+    url: "https://quarto.org/docs/gallery/"
+    tools:
+      - Website
+      - Dashboards
+      - Reproducible Reports
+    keywords:
+      - r
+      - python
+      - visualizations
+      - template
+    image: "quarto-gallery.png"
+    author: "Posit PBC"
+    date_added: "2024-02-10"
+
+  - id: 4
+    title: "DMPTool"
+    description: >
+      Web-based tool that guides researchers through creating data management
+      plans (DMPs) aligned with funder requirements. Includes templates for
+      NSF, NIH, and other agencies.
+    url: "https://dmptool.org/"
+    tools:
+      - Data Management
+      - Project Management
+    keywords:
+      - cloud
+      - template
+    image: "dmptool.png"
+    author: "University of California Curation Center"
+    date_added: "2024-03-01"
+
+  - id: 5
+    title: "GitHub Community Health Files"
+    description: >
+      Documentation and templates for standardising community health files
+      (CODE_OF_CONDUCT, CONTRIBUTING, issue templates) across an
+      organisation's repositories.
+    url: "https://docs.github.com/en/communities"
+    tools:
+      - community building
+      - Project Management
+    keywords:
+      - GitHub
+      - template
+    image: "github-community.png"
+    author: "GitHub"
+    date_added: "2024-03-15"
+
+  - id: 6
+    title: "Observable Framework"
+    description: >
+      Static-site framework for building fast, beautiful data dashboards and
+      reports. Uses Observable JS natively and deploys to any static host
+      including GitHub Pages.
+    url: "https://observablehq.com/framework/"
+    tools:
+      - Dashboards
+      - Website
+    keywords:
+      - visualizations
+      - GitHub
+      - template
+    image: "observable-framework.png"
+    author: "Observable"
+    date_added: "2024-04-01"

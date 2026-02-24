@@ -1,0 +1,96 @@
+name: "Process Example Submission"
+
+# ── Trigger ───────────────────────────────────────────────────────────────────
+# Fires when any label is added to an issue. The job below then checks that:
+#   1. The label added is "approved"
+#   2. The issue also carries "example-submission"
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  process-submission:
+    if: |
+      github.event.label.name == 'approved' &&
+      contains(github.event.issue.labels.*.name, 'example-submission')
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write       # push a branch + commit the updated YAML
+      pull-requests: write  # open the PR
+      issues: write         # post the follow-up comment
+
+    steps:
+      # ── 1. Checkout ──────────────────────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── 2. Python (parse script uses only stdlib + PyYAML) ───────────────────
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install PyYAML
+        run: pip install PyYAML
+
+      # ── 3. Parse issue and append to _code/examples.yaml ────────────────────
+      - name: Parse issue and update YAML
+        env:
+          ISSUE_BODY:   ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE:  ${{ github.event.issue.title }}
+        run: python .github/scripts/parse_submission.py
+
+      # ── 4. Open a PR with the change ─────────────────────────────────────────
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: |
+            feat: add example from issue #${{ github.event.issue.number }}
+          branch: "example/issue-${{ github.event.issue.number }}"
+          title: "Add example: ${{ github.event.issue.title }}"
+          body: |
+            This PR was automatically generated from approved issue #${{ github.event.issue.number }}.
+
+            ## Admin review checklist
+
+            Before merging, please verify:
+
+            - [ ] The new entry in `_code/examples.yaml` looks correct
+                  (title, description, URL, tools, keywords are all accurate)
+            - [ ] If an image URL was provided in the issue, download the image,
+                  rename it to match the `image` field, and commit it to
+                  `content/card-images/` in this branch before merging
+            - [ ] Any new `tools` or `keywords` values are intentional and
+                  consistently spelled/capitalised
+            - [ ] If new tools/keywords were added, update the checkboxes in
+                  `_code/example-submission.yml` AND copy it to
+                  `.github/ISSUE_TEMPLATE/example-submission.yml`
+            - [ ] The site renders cleanly locally (`quarto preview`)
+
+            Closes #${{ github.event.issue.number }}
+          labels: |
+            auto-generated
+            example-submission
+
+      # ── 5. Comment on the issue to notify the submitter ──────────────────────
+      - name: Comment on issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner:        context.repo.owner,
+              repo:         context.repo.repo,
+              body: [
+                "✅ **Submission approved!**",
+                "",
+                "A pull request has been automatically created to add this example to the dashboard.",
+                "Once the PR is reviewed and merged, the dashboard will be updated on the next site build.",
+                "",
+                "Thank you for contributing! 🎉"
+              ].join("\n")
+            })

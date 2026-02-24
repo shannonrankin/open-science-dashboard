@@ -1,0 +1,497 @@
+---
+title: "Dashboard Setup & Maintenance Guide"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "On this page"
+    page-layout: article
+    css: ../dashboard.css
+    include-in-header:
+      text: |
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600&family=DM+Mono:wght@400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+execute:
+  echo: false
+---
+
+# Examples Dashboard — Complete Guide
+
+This document covers everything you need to set up, populate, maintain, and extend the Examples Dashboard as a template repository owner or contributor.
+
+---
+
+## Repository Structure
+
+```
+your-repo/
+│
+├── dashboard.css                         ← All dashboard styling (root level)
+│
+├── _code/
+│   ├── examples.yaml                     ← Single source of truth for all examples
+│   ├── example-submission.yml            ← Reference copy of the issue form template
+│   ├── process_submission.yml            ← Reference copy of the GitHub Action workflow
+│   └── parse_submission.py               ← Reference copy of the parser script
+│
+├── content/
+│   ├── dashboard.qmd                     ← Main dashboard page
+│   ├── instructions.qmd                  ← This guide
+│   └── card-images/                      ← Thumbnail/screenshot images
+│       ├── placeholder.svg               ← Fallback shown when no image is set
+│       └── my-example.png                ← One image file per example
+│
+└── .github/
+    ├── ISSUE_TEMPLATE/
+    │   └── example-submission.yml        ← Working copy (GitHub reads this)
+    ├── workflows/
+    │   └── process_submission.yml        ← Working copy (GitHub reads this)
+    └── scripts/
+        └── parse_submission.py           ← Called by the Action at runtime
+```
+
+> **`_code/` vs `.github/`:** The files in `_code/` are your **editable source copies** — edit them there, then copy the relevant files to their `.github/` locations so GitHub can find them. See the [Keeping copies in sync](#keeping-copies-in-sync) section below.
+
+---
+
+## First-Time Setup
+
+### Step 1 — Update the submit URL and confirm paths
+
+`dashboard.qmd` has a **PATH CONFIGURATION block** near the top of its R chunk.
+This is the single place to update if you ever reorganise the repository.
+Before deploying, replace `YOUR-ORG/YOUR-REPO` with your actual GitHub
+organisation and repository name:
+
+```r
+# ── PATH CONFIGURATION ───────────────────────────────────────────────────────
+path_data        <- here("_code", "examples.yaml")
+path_images      <- "card-images"
+path_placeholder <- "card-images/placeholder.svg"
+submit_url       <- paste0(
+  "https://github.com/YOUR-ORG/YOUR-REPO",   # ← update this
+  "/issues/new?template=example-submission.yml"
+)
+```
+
+### Step 2 — Install the required R package
+
+The dashboard uses the `yaml` package to read `examples.yaml`. Install it once:
+
+```r
+install.packages("yaml")
+```
+
+Your `renv.lock` (if you use `renv`) should capture this automatically when you
+next run `renv::snapshot()`.
+
+### Step 3 — Create a placeholder image
+
+The placeholder image is shown on cards where no image has been provided.
+A minimal SVG is included at `content/card-images/placeholder.svg`.
+You can replace it with your own branded placeholder — any common image format
+works (SVG, PNG, JPG). If you rename it, update `path_placeholder` in the
+PATH CONFIGURATION block of `dashboard.qmd`.
+
+### Step 4 — Configure `_quarto.yml`
+
+A minimal Quarto website configuration:
+
+```yaml
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Your Project Name"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: content/dashboard.qmd
+        text: Examples
+      - href: content/instructions.qmd
+        text: Guide
+
+format:
+  html:
+    theme: default
+```
+
+### Step 5 — Configure GitHub Pages
+
+In your repository: **Settings → Pages → Source → Deploy from branch → `main` → `/docs`.**
+
+After this, every push to `main` that includes a re-rendered `docs/` folder will
+update the live site.
+
+---
+
+## Managing the Examples Data
+
+### The YAML file
+
+All examples live in **`_code/examples.yaml`**. Each entry is one card on
+the dashboard. The file begins with a detailed comment header — read it before
+making edits.
+
+#### Field reference
+
+| Field | Required | Type | Notes |
+|---|---|---|---|
+| `id` | ✅ | integer | Unique. Always increment from the last entry. |
+| `title` | ✅ | string | Short title for the card (~60 chars). |
+| `description` | ✅ | string | 1–3 sentences. Use the `>` block scalar for long text. |
+| `url` | ✅ | string | Full public URL. |
+| `tools` | ✅ | list | One or more tool categories (see below). |
+| `keywords` | ✅ | list | One or more keywords (see below). |
+| `image` | — | string | Filename only (e.g. `my-example.png`). File must be in `content/card-images/`. Leave blank `""` for placeholder. |
+| `author` | — | string | Person or organisation. |
+| `date_added` | — | string | ISO date `YYYY-MM-DD`. For internal tracking. |
+
+#### Example entry
+
+```yaml
+- id: 7
+  title: "My Open Science Workflow"
+  description: >
+    A reproducible end-to-end workflow for open science data analysis,
+    from raw data ingestion through to publication-ready figures.
+  url: "https://github.com/example/open-workflow"
+  tools:
+    - Reproducible Reports
+    - Data Management
+  keywords:
+    - r
+    - GitHub
+    - template
+  image: "open-workflow.png"
+  author: "Jane Smith"
+  date_added: "2025-03-01"
+```
+
+#### The YAML list syntax means no quoting nightmares
+
+Unlike CSV, multi-value fields are just YAML lists — no need to wrap
+comma-separated values in quotes. Each tool or keyword is its own indented
+`- item` line.
+
+---
+
+### Adding an example manually
+
+1. Open `_code/examples.yaml` in RStudio or any text editor.
+2. Copy an existing entry block and paste it at the bottom of the `examples:` list.
+3. Increment `id` by 1 from the previous last entry.
+4. Fill in the fields.
+5. If you have an image, save it in `content/card-images/`.
+6. Render (`quarto render`) and verify the card appears correctly.
+7. Commit and push.
+
+---
+
+### Adding or modifying Tools and Keywords
+
+Tools and keywords **do not need to be registered anywhere** — the dashboard
+derives its dropdown options automatically from all values present in
+`_code/examples.yaml` at render time.
+
+To **add** a new tool or keyword: use it in a new (or existing) entry.
+It will appear in the dropdown on the next render.
+
+To **remove** a tool or keyword from the dropdowns: remove it from every entry
+that uses it.
+
+To **rename** a tool or keyword: do a find-and-replace across `_code/examples.yaml`.
+
+The current default values are listed in the GitHub issue form template
+(`_code/example-submission.yml` / `.github/ISSUE_TEMPLATE/example-submission.yml`)
+— update **both copies** when you add new official tools or keywords so
+submitters see the full list.
+
+---
+
+## The Submission Workflow
+
+### End-to-end flow
+
+```
+1. Community member opens the GitHub issue using the "Submit a New
+   Dashboard Example" template and fills in the structured form.
+
+2. The issue is auto-labelled "example-submission" and "needs-review".
+
+3. Admin reviews the issue content.
+
+4. If approved, admin adds the "approved" label.
+       ↓
+   GitHub Action fires automatically:
+     a. Parses the issue form body
+     b. Appends a new entry to _code/examples.yaml
+     c. Opens a Pull Request on a branch named example/issue-N
+
+5. Admin reviews the PR:
+     a. Checks the new YAML entry in _code/examples.yaml looks correct
+     b. Downloads any submitted image → saves to content/card-images/
+     c. Verifies any new tool/keyword values are intentional
+     d. Runs quarto preview locally (optional but recommended)
+
+6. Admin merges the PR.
+
+7. Admin re-renders and pushes docs/ (or CI does it automatically).
+
+8. New card appears live on the dashboard. ✅
+```
+
+---
+
+### Setting up the GitHub Action (one-time)
+
+The workflow file (`.github/workflows/process-submission.yml`) is already
+in place. It needs two things before it will work:
+
+#### Create the required issue labels
+
+Go to your repo → **Issues → Labels → New label** and create:
+
+| Label | Colour | Purpose |
+|---|---|---|
+| `example-submission` | any | Auto-applied by the issue template. Identifies submission issues. |
+| `needs-review` | yellow | Auto-applied. Signals it's awaiting admin review. |
+| `approved` | green | Applied **manually by admins** to trigger the Action. |
+| `auto-generated` | grey | Applied to PRs created by the Action. |
+
+#### Set workflow permissions
+
+Go to: **Settings → Actions → General → Workflow permissions**
+Select: **Read and write permissions** → Save.
+
+This allows the Action to commit to the repository and open PRs using
+`GITHUB_TOKEN` (no additional secrets needed).
+
+---
+
+### Reviewing and approving a submission (admin steps)
+
+1. Open the new issue (labelled `example-submission` + `needs-review`).
+2. Review: is the URL valid and publicly accessible? Is the description accurate?
+   Are the tool/keyword selections appropriate?
+3. If you want to reject it, close the issue with a comment explaining why.
+4. If you approve it, add the **`approved`** label. The Action will run within ~1 minute.
+5. Check the **Actions** tab to confirm the workflow completed successfully.
+6. Find the new PR (it's linked in a comment automatically posted to the issue).
+7. In the PR, review `_code/examples.yaml` in the diff.
+8. If the submitter provided an image URL:
+   - Download the image.
+   - Rename it to match the `image` field in the new YAML entry.
+   - Add it to `content/card-images/` and commit it to the PR branch.
+9. Merge the PR.
+10. Re-render and push (`quarto render` → `git add docs/` → `git push`).
+
+---
+
+### Manual fallback (no GitHub Action)
+
+If you prefer not to use the Action, or if something fails:
+
+1. Read the issue carefully and extract the submitted values.
+2. Open `_code/examples.yaml` and manually append a new entry.
+3. If an image was provided, download it to `content/card-images/`.
+4. Commit, push, re-render.
+
+---
+
+### Keeping copies in sync {#keeping-copies-in-sync}
+
+The files in `_code/` are your **source of record** — the copies you edit
+in RStudio alongside your other project files. The `.github/` copies are
+what GitHub actually reads and executes.
+
+**When you edit `_code/example-submission.yml`** (e.g. to add new tools or
+keywords to the form checkboxes), copy it to `.github/ISSUE_TEMPLATE/`:
+
+```bash
+cp _code/example-submission.yml .github/ISSUE_TEMPLATE/example-submission.yml
+```
+
+**When you edit `_code/process_submission.yml`** (e.g. to change Action
+behaviour), copy it to `.github/workflows/`:
+
+```bash
+cp _code/process_submission.yml .github/workflows/process_submission.yml
+```
+
+**`_code/parse_submission.py`** is the script actually called by the Action
+(via `.github/scripts/parse_submission.py`). Keep these in sync the same way:
+
+```bash
+cp _code/parse_submission.py .github/scripts/parse_submission.py
+```
+
+> **Tip:** You can automate these copies with a short shell script or a
+> pre-commit hook if you find yourself editing these files frequently.
+
+### Local render and preview
+
+```bash
+# In your project directory (or use RStudio's Render button):
+quarto render
+
+# Live preview in browser with hot reload:
+quarto preview
+```
+
+### Deploying to GitHub Pages
+
+The standard workflow after any content update:
+
+```bash
+quarto render          # rebuilds docs/
+git add docs/
+git commit -m "render: update dashboard"
+git push
+```
+
+GitHub Pages will serve the updated `docs/` automatically within ~30 seconds.
+
+### Automating renders with a GitHub Action (optional)
+
+Add a second workflow to render the site automatically on every push to `main`:
+
+```yaml
+# .github/workflows/render-site.yml
+name: Render and Deploy Site
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            any::tidyverse
+            any::here
+            any::yaml
+            any::jsonlite
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Render site
+        run: quarto render
+
+      - uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: docs
+```
+
+---
+
+## Customising the Dashboard
+
+### Theme colours and fonts
+
+All visual tokens are CSS custom properties at the top of `dashboard.css`
+(in the root directory).
+Change these to retheme the entire dashboard:
+
+```css
+:root {
+  --ink:        #1a1410;   /* primary text */
+  --ivory:      #f7f3ec;   /* page background */
+  --terra:      #c4583a;   /* tool tag accent */
+  --teal:       #2a6b6e;   /* keyword tag accent */
+  --serif:      "Fraunces", Georgia, serif;
+  --sans:       "DM Sans", system-ui, sans-serif;
+  --mono:       "DM Mono", monospace;
+}
+```
+
+To swap fonts: update the Google Fonts `<link>` tag in the `include-in-header`
+section of `content/dashboard.qmd`, and update the `--serif`/`--sans`/`--mono`
+variables in `dashboard.css`.
+
+### Changing filter logic (OR → AND)
+
+By default, selecting multiple tools uses **OR logic**: a card appears if it
+matches *any* selected tool. To require *all* selected tools to match (AND logic),
+edit the `filtering` OJS cell in `content/dashboard.qmd`:
+
+```javascript
+// Change .some() to .every() for AND logic:
+const toolMatch =
+  selectedTools.length === 0 ||
+  selectedTools.every(t => exTools.includes(t))   // ← every, not some
+
+const kwMatch =
+  selectedKeywords.length === 0 ||
+  selectedKeywords.every(k => exKws.includes(k))  // ← every, not some
+```
+
+### Adding a new field to cards
+
+1. Add the new field to entries in `_code/examples.yaml`.
+2. In the R chunk in `content/dashboard.qmd`, add the field to the `map_dfr()` tibble.
+3. In the OJS `cards` cell, reference `ex.your_field` inside `renderCard()`.
+
+### Updating the issue form when tools/keywords change
+
+When you add new official tools or keywords to `_code/examples.yaml`, also add them
+to the checkboxes in `_code/example-submission.yml`, then copy that file to
+`.github/ISSUE_TEMPLATE/example-submission.yml` so submitters see the full list.
+
+---
+
+## Troubleshooting
+
+**Dashboard shows no examples / blank page**
+: Confirm `_code/examples.yaml` exists and is valid YAML (no tab characters —
+use spaces). Run `yaml::read_yaml(here("_code", "examples.yaml"))` in R to check.
+Verify the `here()` path in the PATH CONFIGURATION block resolves correctly
+from your project root.
+
+**Images not appearing on cards**
+: The filename in the `image` field must exactly match the file in
+`content/card-images/` (case-sensitive on Linux/GitHub). The card silently
+falls back to the placeholder on load failure — open your browser's DevTools
+console to see the actual 404 URL.
+
+**New tools/keywords not appearing in dropdowns**
+: The dropdowns are built from the data at render time. Re-render after editing
+`_code/examples.yaml`.
+
+**GitHub Action not firing on "approved" label**
+: Check the label name is spelled exactly `approved` (case-sensitive).
+Check the Actions tab for errors. Confirm workflow permissions are set to
+"Read and write" in repository Settings.
+
+**`parse_submission.py` producing empty or wrong field values**
+: GitHub renders issue form fields as `### Field Label\n\nvalue`. If GitHub
+changes this format, the regex in the script may need updating. Print
+`ISSUE_BODY` in the Action's logs to inspect the raw text, then adjust
+the `extract_field()` patterns in `_code/parse_submission.py`, and copy
+the updated file to `.github/scripts/parse_submission.py`.
+
+**`_code/` and `.github/` copies are out of sync**
+: If the Action is behaving unexpectedly, check whether you edited `_code/`
+but forgot to copy to `.github/`. See the [Keeping copies in sync](#keeping-copies-in-sync) section.
+
+**`renv` doesn't include the `yaml` package**
+: Run `install.packages("yaml")` then `renv::snapshot()` to capture it.
+
+---
+
+## Contributing to This Template
+
+If you improve this dashboard template and want to share changes upstream,
+please open an issue or PR in the original template repository.
+Suggestions for new default tools/keywords, design improvements,
+workflow enhancements, and accessibility fixes are all welcome.
