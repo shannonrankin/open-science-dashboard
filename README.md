@@ -1,4 +1,4 @@
-Template for development of regional lab manuals as part of the PAM SI
+Dashboard for searchable Tools, Examples, Templates for Open Source Tools to accelerate adoption of an open source workflow
 
 ### Disclaimer
 

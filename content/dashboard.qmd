@@ -15,7 +15,7 @@ execute:
   warning: false
   message: false
 ---
-Need Instructions? [Here you go!](https://shannonrankin.github.io/pathways-flowchart/content/instructions.html)
+Need Instructions? [Here you go!](https://shannonrankin.github.io/open-science-dashboard/content/instructions.html)
 ```{r}
 #| label: load-data
 
@@ -41,7 +41,7 @@ path_data   <- here("_code", "examples.yaml")
 img_folder  <- "card-images"
 img_default <- paste0(img_folder, "/placeholder.svg")
 submit_url  <- paste0(
-  "https://github.com/shannonrankin/pathways-flowchart",
+  "https://github.com/shannonrankin/open-science-dashboard",
   "/issues/new?template=example-submission.yml"
 )
 
