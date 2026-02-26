@@ -43,9 +43,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-9beafc43c06a0d7c97216f0f6f3877a5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-8520eb5d43350003b5805757059c243e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-9beafc43c06a0d7c97216f0f6f3877a5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9b24b7aa4dada73b2f1a005fa628a955.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-955dab038907d35f91c148f97680b2a0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-9b24b7aa4dada73b2f1a005fa628a955.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -73,8 +73,11 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 
 
+<link rel="stylesheet" href="tip.css">
 </head>
 
 <body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -308,18 +311,11 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#why" id="toc-why" class="nav-link active" data-scroll-target="#why">Why?</a></li>
-  <li><a href="#what" id="toc-what" class="nav-link" data-scroll-target="#what">What?</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://shannonrankin.github.io/open-science-dashboard/edit/main/index.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://shannonrankin.github.io/open-science-dashboard/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://shannonrankin.github.io/open-science-dashboard/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -330,7 +326,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-title-meta column-body">
+<div class="quarto-title-meta column-page-right">
 
     
   
@@ -342,22 +338,73 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="why" class="level3">
-<h3 class="anchored" data-anchor-id="why">Why?</h3>
-<p>Open Source tools designed to streamline and automate workflows are readily available, and increasingly easy to copy and modify to suit personal needs. Finding these examples is increasingly difficult!</p>
-</section>
-<section id="what" class="level3">
-<h3 class="anchored" data-anchor-id="what">What?</h3>
-<p>This Open Science Dashboard is a curated set of open source examples and templates that can be easily adopted for personal use. The dashboard provides:</p>
-<ul>
-<li><p>Search/Filter by keywords such as ‘r’, ‘visualizations’, etc.</p></li>
-<li><p>Search/Filter by by Tool, such as ‘Lab Manual’, ‘Reproducible Reports’, etc</p></li>
-<li><p>Card Layout provides thumbnail image, title, description, list of keywords, and a direct link to the site.</p></li>
-<li><p>Options for submitting examples to add to the selection</p></li>
-</ul>
+<!-- ============================================================
+     Open Science Tip Card
+     Tips are loaded from _code/tips.yaml at render time via
+     the R chunk below, then passed to JS as window.OSTIPS.
+     The site base URL is injected into a <meta> tag so that
+     tips-card.js can resolve image paths absolutely — robust
+     regardless of where in the site the card is rendered.
+     ============================================================ -->
+<!-- site-url injected at render time so JS can build absolute image paths -->
+<meta name="ostip-base-url" content="https://github.com/shannonrankin/open-science-dashboard">
+<script>
+// Tips data injected at render time from _code/tips.yaml
+window.OSTIPS = [{"id":"tip-001","name":"OSF Preregistration","category":"Preregistration","text":"Preregister your study on the Open Science Framework (OSF) before collecting data. Specify your hypotheses, design, and analysis plan. This separates confirmatory from exploratory research and boosts credibility of your findings.","link":"https://help.osf.io/article/158-create-a-preregistration","link_label":"How to preregister on OSF","image":{},"contributor":"OpenSciTips","date_added":"2025-01-15"},{"id":"tip-002","name":"FAIR Data Principles","category":"Open Data","text":"Make your data Findable, Accessible, Interoperable, and Reusable (FAIR). Use persistent identifiers like DOIs, add rich metadata, choose open file formats, and apply a clear data license such as CC BY 4.0.","link":"https://www.go-fair.org/fair-principles/","link_label":"Learn about FAIR principles","image":{},"contributor":"OpenSciTips","date_added":"2025-01-15"},{"id":"tip-003","name":"README for Data","category":"Reproducibility","text":"Every dataset deserves a README. Document variable names and units, data collection methods, file structure, software requirements, and any known quirks. A good README means your future self—and others—can actually use the data.","link":"https://cornell.ca1.qualtrics.com/jfe/form/SV_8BP4oE6tT0PH0yz","link_label":"Cornell README template","image":{},"contributor":"OpenSciTips","date_added":"2025-01-15"},{"id":"tip-004","name":"Zenodo Archiving","category":"Open Data","text":"Archive your code and data on Zenodo to get a citable DOI. Zenodo integrates with GitHub, making it easy to snapshot releases. Your work becomes permanently citable, discoverable, and credit-giving—even if your GitHub URL changes.","link":"https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content","link_label":"GitHub + Zenodo integration guide","image":{},"contributor":"OpenSciTips","date_added":"2025-01-15"},{"id":"tip-005","name":"R renv for Reproducibility","category":"Open Tools & Software","text":"Use the {renv} package to create a lockfile that records the exact versions of every R package your project uses. Anyone who runs renv::restore() will get your exact environment—no more 'works on my machine' problems.","link":"https://rstudio.github.io/renv/articles/renv.html","link_label":"Getting started with renv","image":{},"contributor":"OpenSciTips","date_added":"2025-01-15"},{"id":"tip-006","name":"CONSORT / STROBE Reporting","category":"Transparent Reporting","text":"Use established reporting guidelines like CONSORT (clinical trials) or STROBE (observational studies) to make sure you report everything readers need to evaluate and replicate your work. Many journals now require checklist submission.","link":"https://www.equator-network.org/","link_label":"Find your reporting guideline at EQUATOR","image":{},"contributor":"OpenSciTips","date_added":"2025-01-15"},{"id":"tip-007","name":"ReproHack Events","category":"Community & Collaboration","text":"Join or host a ReproHack—a one-day event where participants attempt to reproduce results from published papers. It's a fun, low-stakes way to practice reproducibility skills, give authors useful feedback, and build community.","link":"https://www.reprohack.org/","link_label":"Find or host a ReproHack","image":{},"contributor":"OpenSciTips","date_added":"2025-01-15"},{"id":"tip-008","name":"Registered Reports","category":"Preregistration","text":"Consider submitting a Registered Report: peer review happens before data collection, and acceptance is based on the question and methods—not the outcome. This eliminates publication bias and keeps incentives focused on good science.","link":"https://www.cos.io/initiatives/registered-reports","link_label":"What are Registered Reports?","image":{},"contributor":"OpenSciTips","date_added":"2025-01-15"},{"id":"tip-009","name":"Open Peer Review","category":"Transparent Reporting","text":"Opt for open peer review when available—where reviews and reviewer identities are published alongside the paper. This increases accountability, improves review quality, and makes the scientific conversation visible to everyone.","link":"https://peercommunityin.org/","link_label":"Explore Peer Community In (PCI)","image":{},"contributor":"OpenSciTips","date_added":"2025-01-15"}];
+</script>
+<!-- ── Tip Card HTML ──────────────────────────────────────── -->
+<div class="open-sci-tip-wrapper">
+
+  <p class="tip-section-label">✨ Open Science Tip</p>
+
+  <div class="tip-card" id="os-tip-card" data-category="">
+
+    <!-- Category badge -->
+    <div class="tip-category-badge">
+      <span>💡</span><span>Open Science</span>
+    </div>
+
+    <!-- Header: name + optional thumbnail -->
+    <div class="tip-header">
+      <h3 class="tip-name anchored">Loading tip…</h3>
+      <img class="tip-thumb" src="" alt="" style="display:none;">
+    </div>
+
+    <!-- Tip text -->
+    <p class="tip-text"></p>
+
+    <!-- Footer: learn more link + controls -->
+    <div class="tip-footer">
+      <a class="tip-learn-link" href="#" target="_blank" rel="noopener">
+        <span class="tip-link-label">Learn more</span>
+        <span class="tip-arrow-icon">→</span>
+      </a>
+
+      <div class="tip-controls">
+        <button class="tip-btn" id="tip-btn-prev" title="Previous tip">← Prev</button>
+        <span class="tip-counter" id="tip-counter">— / —</span>
+        <button class="tip-btn" id="tip-btn-next" title="Next tip">Next →</button>
+        <button class="tip-btn" id="tip-btn-shuffle" title="Shuffle tips">🔀</button>
+      </div>
+    </div>
+
+  </div><!-- /.tip-card -->
+
+  <!-- Submit link — points to tips_contribute.qmd and GitHub issue form -->
+  <p class="tip-submit-row">
+    Got a tip to share?
+    <a href="content/tips_contribute.html" target="_blank" rel="noopener">Learn how to contribute</a>
+    or
+    <a href="https://github.com/YOUR-ORG/YOUR-REPO/issues/new?template=submit-a-tip.yml" target="_blank" rel="noopener">submit directly via GitHub →</a>
+  </p>
+
+</div><!-- /.open-sci-tip-wrapper -->
+
+<!-- Load the tip card JS -->
+<script src="_code/tips-card.js"></script>
+<p><a href="https://shannonrankin.github.io/open-science-dashboard/content/dashboard.html"><img src="content/images/dashboard-click-here-button.png" class="img-fluid" width="409"></a></p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -773,7 +820,7 @@ ul.task-list li input[type="checkbox"] {
     }
   });
   </script>
-<nav class="page-navigation column-body">
+<nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
@@ -790,7 +837,7 @@ ul.task-list li input[type="checkbox"] {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://shannonrankin.github.io/open-science-dashboard/edit/main/index.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://shannonrankin.github.io/open-science-dashboard/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://shannonrankin.github.io/open-science-dashboard/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions"><ul><li><a href="https://shannonrankin.github.io/open-science-dashboard/edit/main/index.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://shannonrankin.github.io/open-science-dashboard/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://shannonrankin.github.io/open-science-dashboard/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This page is built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>

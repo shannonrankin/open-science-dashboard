@@ -1,0 +1,319 @@
+/* ============================================================
+   tip.css — Open Science Tips Card
+   Font: Nunito (swap via --tip-font variable below)
+
+   Alternative fonts to try:
+     'Quicksand'  — geometric, playful
+     'Poppins'    — modern, slightly rounded
+     'DM Sans'    — clean, warm, professional
+     'Atkinson Hyperlegible' — max readability/accessibility
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap');
+
+/* ── Design tokens ─────────────────────────────────────────── */
+:root {
+  --tip-font:           'Nunito', sans-serif;
+
+  /* Card background rotates through these per category */
+  --tip-bg-preregistration:    #E8F4FD;   /* sky blue   */
+  --tip-bg-open-data:          #E8FDF4;   /* mint green */
+  --tip-bg-reproducibility:    #FEF9E8;   /* warm amber */
+  --tip-bg-tools:              #F4E8FD;   /* soft lilac */
+  --tip-bg-reporting:          #FDE8F0;   /* blush pink */
+  --tip-bg-community:          #E8FDE8;   /* leaf green */
+  --tip-bg-default:            #EEF2FF;   /* periwinkle */
+
+  --tip-accent-preregistration: #2980B9;
+  --tip-accent-open-data:       #1ABC9C;
+  --tip-accent-reproducibility: #E67E22;
+  --tip-accent-tools:           #8E44AD;
+  --tip-accent-reporting:       #E91E8C;
+  --tip-accent-community:       #27AE60;
+  --tip-accent-default:         #5C6BC0;
+
+  --tip-radius:     1.25rem;
+  --tip-shadow:     0 4px 24px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.06);
+  --tip-shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.13), 0 2px 8px rgba(0, 0, 0, 0.08);
+  --tip-transition: 0.25s ease;
+}
+
+/* ── Wrapper ───────────────────────────────────────────────── */
+.open-sci-tip-wrapper {
+  font-family: var(--tip-font);
+  max-width: 680px;
+  margin: 2rem auto;
+}
+
+.open-sci-tip-wrapper .tip-section-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 0.6rem;
+  padding-left: 0.25rem;
+}
+
+/* ── Card ──────────────────────────────────────────────────── */
+.tip-card {
+  background: var(--tip-bg-default);
+  border-radius: var(--tip-radius);
+  box-shadow: var(--tip-shadow);
+  padding: 1.6rem 1.8rem 1.4rem;
+  transition: box-shadow var(--tip-transition), transform var(--tip-transition);
+  position: relative;
+  overflow: hidden;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tip-card:hover {
+  box-shadow: var(--tip-shadow-hover);
+  transform: translateY(-2px);
+}
+
+/* Subtle decorative blob in top-right corner */
+.tip-card::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+/* ── Category badge ────────────────────────────────────────── */
+.tip-category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.7rem;
+  border-radius: 2rem;
+  background: rgba(255,255,255,0.6);
+  color: var(--tip-accent-default);
+  width: fit-content;
+  margin-bottom: 0.25rem;
+}
+
+/* ── Header row (name + optional image) ────────────────────── */
+.tip-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.tip-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #1a1a2e;
+  margin: 0;
+}
+
+.tip-thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 0.6rem;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+/* ── Tip text ──────────────────────────────────────────────── */
+.tip-text {
+  font-size: 0.97rem;
+  font-weight: 500;
+  line-height: 1.65;
+  color: #333;
+  margin: 0;
+  flex: 1;
+}
+
+/* ── Footer row ────────────────────────────────────────────── */
+.tip-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+}
+
+.tip-learn-link {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--tip-accent-default);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: gap var(--tip-transition);
+}
+
+.tip-learn-link:hover {
+  text-decoration: underline;
+  gap: 0.5rem;
+}
+
+.tip-learn-link .tip-arrow-icon {
+  font-size: 1rem;
+  display: inline-block;
+  transition: transform var(--tip-transition);
+}
+
+.tip-learn-link:hover .tip-arrow-icon {
+  transform: translateX(3px);
+}
+
+/* ── Controls ──────────────────────────────────────────────── */
+.tip-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.tip-btn {
+  font-family: var(--tip-font);
+  font-size: 0.82rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.4rem 0.9rem;
+  cursor: pointer;
+  background: rgba(255,255,255,0.65);
+  color: #444;
+  transition: background var(--tip-transition), color var(--tip-transition), transform var(--tip-transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  backdrop-filter: blur(4px);
+}
+
+.tip-btn:hover {
+  background: rgba(255,255,255,0.9);
+  color: #111;
+  transform: scale(1.04);
+}
+
+.tip-btn:active {
+  transform: scale(0.97);
+}
+
+.tip-counter {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #888;
+  white-space: nowrap;
+}
+
+/* ── Submit link row ───────────────────────────────────────── */
+.tip-submit-row {
+  text-align: center;
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+  color: #aaa;
+  font-family: var(--tip-font);
+}
+
+.tip-submit-row a {
+  color: #888;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--tip-transition);
+}
+
+.tip-submit-row a:hover {
+  color: #444;
+  text-decoration: underline;
+}
+
+/* ── Fade animation on tip change ──────────────────────────── */
+@keyframes tipFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.tip-card.tip-animating {
+  animation: tipFadeIn 0.3s ease forwards;
+}
+
+/* ── Per-category coloring ─────────────────────────────────── */
+.tip-card[data-category="Preregistration"] {
+  background: var(--tip-bg-preregistration);
+  color: var(--tip-accent-preregistration);
+}
+.tip-card[data-category="Preregistration"] .tip-category-badge,
+.tip-card[data-category="Preregistration"] .tip-learn-link {
+  color: var(--tip-accent-preregistration);
+}
+
+.tip-card[data-category="Open Data"] {
+  background: var(--tip-bg-open-data);
+  color: var(--tip-accent-open-data);
+}
+.tip-card[data-category="Open Data"] .tip-category-badge,
+.tip-card[data-category="Open Data"] .tip-learn-link {
+  color: var(--tip-accent-open-data);
+}
+
+.tip-card[data-category="Reproducibility"] {
+  background: var(--tip-bg-reproducibility);
+  color: var(--tip-accent-reproducibility);
+}
+.tip-card[data-category="Reproducibility"] .tip-category-badge,
+.tip-card[data-category="Reproducibility"] .tip-learn-link {
+  color: var(--tip-accent-reproducibility);
+}
+
+.tip-card[data-category="Open Tools & Software"] {
+  background: var(--tip-bg-tools);
+  color: var(--tip-accent-tools);
+}
+.tip-card[data-category="Open Tools & Software"] .tip-category-badge,
+.tip-card[data-category="Open Tools & Software"] .tip-learn-link {
+  color: var(--tip-accent-tools);
+}
+
+.tip-card[data-category="Transparent Reporting"] {
+  background: var(--tip-bg-reporting);
+  color: var(--tip-accent-reporting);
+}
+.tip-card[data-category="Transparent Reporting"] .tip-category-badge,
+.tip-card[data-category="Transparent Reporting"] .tip-learn-link {
+  color: var(--tip-accent-reporting);
+}
+
+.tip-card[data-category="Community & Collaboration"] {
+  background: var(--tip-bg-community);
+  color: var(--tip-accent-community);
+}
+.tip-card[data-category="Community & Collaboration"] .tip-category-badge,
+.tip-card[data-category="Community & Collaboration"] .tip-learn-link {
+  color: var(--tip-accent-community);
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .tip-card {
+    padding: 1.2rem 1.2rem 1rem;
+  }
+  .tip-name {
+    font-size: 1.05rem;
+  }
+  .tip-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
