@@ -1,0 +1,103 @@
+---
+title: "Contribute an Open Science Tip"
+---
+
+Got an open science practice worth sharing? We'd love to feature it! Tips are community-contributed and curator-reviewed before appearing on the site.
+
+::: {.callout-note icon=false}
+## 💡 How to Submit
+1. Click the button below to open a pre-structured GitHub issue form
+2. Fill in the required fields — name, category, tip text, and a learn-more link
+3. Optionally include a thumbnail image URL (must be **under 120 kB** and publicly accessible)
+4. Submit — a curator will review and respond on the issue thread
+
+<a href="../../issues/new?template=submit-a-tip.yml" class="btn btn-primary" target="_blank" rel="noopener">
+  Submit a Tip via GitHub →
+</a>
+:::
+
+## What Happens After You Submit
+
+Once submitted, a curator will review your tip and take one of three actions:
+
+| Decision | What happens |
+|---|---|
+| ✅ **Accept** | Curator applies the `tip-accepted` label → tip is automatically added to the site |
+| ✏️ **Modify & accept** | Curator edits the issue body, then applies `tip-accepted` |
+| ❌ **Decline** | Issue is closed with a comment explaining why |
+
+You'll be notified on the issue thread either way.
+
+## Tip Writing Guidelines
+
+::: {.callout-tip icon=false collapse=true}
+## 📋 What makes a good tip?
+
+- **Short name** (3–5 words): memorable and easy to scan
+- **Tip text** (2–4 sentences): explain what it is, why it matters, and how to get started
+- **Link**: stable, authoritative source — official docs, OSF, institutional or journal sites preferred
+- **Image** (optional): a logo, icon, or illustration that represents the tip. Must be openly licensed (CC0, CC BY, or public domain) and under 120 kB
+:::
+
+## Categories
+
+Choose the category that best fits your tip:
+
+| Icon | Category |
+|:---:|---|
+| 📋 | Preregistration |
+| 📂 | Open Data |
+| 🔁 | Reproducibility |
+| 🛠️ | Open Tools & Software |
+| 📝 | Transparent Reporting |
+| 🤝 | Community & Collaboration |
+
+## Image Guidelines
+
+::: {.callout-warning icon=false}
+## 🖼️ Image requirements
+
+- File size must be **under 120 kB** — larger images will be flagged automatically and excluded
+- Provide a **direct URL** to a publicly accessible image (e.g. hosted on GitHub, OSF, or Wikimedia Commons)
+- Accepted formats: PNG, JPG, WebP, GIF
+- Image must be **openly licensed** (CC0, CC BY, or public domain)
+
+If your image is too large, tools like [Squoosh](https://squoosh.app/) can reduce file size without noticeable quality loss.
+:::
+
+## For Curators
+
+::: {.callout-note icon=false collapse=true}
+## 🔧 Curator workflow
+
+1. Review the submitted issue for quality, accuracy, and fit with the project
+2. If edits are needed, modify the issue body directly before labeling
+3. Apply the label **`tip-accepted`** to trigger the automation
+4. The GitHub Action will:
+   - Parse the issue fields
+   - Validate and download any submitted image
+   - Append the new tip to `_code/tips.yaml`
+   - Commit the changes and trigger a site re-render and deploy
+   - Post a confirmation comment and close the issue
+
+If the automation cannot parse a field, it will comment on the issue with the specific error rather than failing silently. Re-apply the `tip-accepted` label after fixing to retry.
+:::
+
+## Project File Structure
+
+```
+_code/
+  tips.yaml           ← all tips live here (YAML, one entry per tip)
+  tips-card.js        ← card navigation and rendering logic
+tip.css               ← card styling (swap font via --tip-font CSS variable)
+index.qmd             ← home page with the tip card embedded
+content/
+  tip-images/         ← thumbnail images (auto-populated by GitHub Action)
+  tips_contribute.qmd ← this page
+.github/
+  ISSUE_TEMPLATE/
+    submit-a-tip.yml  ← structured tip submission form
+  workflows/
+    add-tip.yml       ← automation: tip-accepted label → parse → commit → deploy
+    deploy.yml        ← Quarto render + GitHub Pages deploy
+```

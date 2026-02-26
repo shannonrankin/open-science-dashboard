@@ -1,0 +1,99 @@
+name: "💡 Submit an Open Science Tip"
+description: "Share an open science practice tip to be featured on the site."
+title: "[Tip]: "
+labels: ["tip-submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Thanks for contributing a tip! 🎉
+        
+        Please fill in the fields below. A curator will review your submission and may accept, modify, or decline it. If accepted, it will be automatically added to the site.
+        
+        **Image guidelines:** Images must be under 120 kB. Provide a direct URL to a publicly accessible image (e.g. hosted on GitHub, OSF, or Wikimedia Commons). Accepted formats: PNG, JPG, GIF, WebP.
+
+  - type: input
+    id: tip-name
+    attributes:
+      label: "Tip Name"
+      description: "A short, memorable name for this tip (a few words at most)."
+      placeholder: "e.g. OSF Preregistration"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: tip-category
+    attributes:
+      label: "Category"
+      description: "Which open science area does this tip belong to?"
+      options:
+        - "Preregistration"
+        - "Open Data"
+        - "Reproducibility"
+        - "Open Tools & Software"
+        - "Transparent Reporting"
+        - "Community & Collaboration"
+    validations:
+      required: true
+
+  - type: textarea
+    id: tip-text
+    attributes:
+      label: "Tip Text"
+      description: "Explain the tip in 2–4 sentences. Be clear, encouraging, and practical."
+      placeholder: "Describe what the tip is, why it matters, and how to get started."
+    validations:
+      required: true
+
+  - type: input
+    id: tip-link
+    attributes:
+      label: "Learn More Link (URL)"
+      description: "A URL where readers can learn more. Use a stable, authoritative source."
+      placeholder: "https://..."
+    validations:
+      required: true
+
+  - type: input
+    id: tip-link-label
+    attributes:
+      label: "Link Label"
+      description: "Short label for the 'learn more' link (e.g. 'Getting started with renv')."
+      placeholder: "e.g. Official documentation"
+    validations:
+      required: false
+
+  - type: input
+    id: tip-image
+    attributes:
+      label: "Tip Image URL (optional)"
+      description: |
+        URL to a small thumbnail image (PNG/JPG/WebP/GIF). 
+        ⚠️ File must be **under 120 kB**. Larger files will be rejected automatically.
+        The image should be publicly accessible and openly licensed.
+      placeholder: "https://..."
+    validations:
+      required: false
+
+  - type: input
+    id: tip-contributor
+    attributes:
+      label: "Your Name or Handle (optional)"
+      description: "How you'd like to be credited, if at all."
+      placeholder: "e.g. Jane Smith or @janesmith"
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: tip-checklist
+    attributes:
+      label: "Submission Checklist"
+      options:
+        - label: "My tip text is original or properly attributed."
+          required: true
+        - label: "The 'learn more' link is publicly accessible and stable."
+          required: true
+        - label: "If I included an image, it is under 120 kB and openly licensed."
+          required: false
+        - label: "I understand that curators may modify this tip before accepting it."
+          required: true

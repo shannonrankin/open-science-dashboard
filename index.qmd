@@ -2,20 +2,107 @@
 title: "Open Science Dashboard"
 subtitle: "Searchable Dashboard with Examples and Templates to Accelerate Adoption of Open Science Workflow"
 page-layout: full
+format:
+  html:
+    css: tip.css
+    include-in-header:
+      text: |
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 ---
 
-### Why?
+```{=html}
+<!-- ============================================================
+     Open Science Tip Card
+     Tips are loaded from _code/tips.yaml at render time via
+     the R chunk below, then passed to JS as window.OSTIPS.
+     The site base URL is injected into a <meta> tag so that
+     tips-card.js can resolve image paths absolutely — robust
+     regardless of where in the site the card is rendered.
+     ============================================================ -->
+```
 
-Open Source tools designed to streamline and automate workflows are readily available, and increasingly easy to copy and modify to suit personal needs. Finding these examples is increasingly difficult!
+```{r load-tips, echo=FALSE, message=FALSE}
+library(yaml)
+library(jsonlite)
 
-### What?
+tips_raw  <- yaml::read_yaml("_code/tips.yaml")
+tips_json <- jsonlite::toJSON(tips_raw$tips, auto_unbox = TRUE)
 
-This Open Science Dashboard is a curated set of open source examples and templates that can be easily adopted for personal use. The dashboard provides:
+# Read site-url from _quarto.yml for robust image path resolution.
+# %||% is the null-coalescing operator — defined inline to avoid
+# adding an rlang dependency just for this one use.
+`%||%` <- function(a, b) if (!is.null(a) && nzchar(a)) a else b
 
--   Search/Filter by keywords such as 'r', 'visualizations', etc.
+quarto_cfg <- yaml::read_yaml("_quarto.yml")
+site_url   <- (quarto_cfg$website[["site-url"]] %||%
+               quarto_cfg[["site-url"]]         %||%
+               "")
+site_url   <- sub("/$", "", site_url)   # strip any trailing slash
+```
 
--   Search/Filter by by Tool, such as 'Lab Manual', 'Reproducible Reports', etc
+```{=html}
+<!-- site-url injected at render time so JS can build absolute image paths -->
+<meta name="ostip-base-url" content="`r site_url`">
+<script>
+// Tips data injected at render time from _code/tips.yaml
+window.OSTIPS = `r tips_json`;
+</script>
+```
 
--   Card Layout provides thumbnail image, title, description, list of keywords, and a direct link to the site.
+<!-- ── Tip Card HTML ──────────────────────────────────────── -->
 
--   Options for submitting examples to add to the selection
+```{=html}
+<div class="open-sci-tip-wrapper">
+
+  <p class="tip-section-label">✨ Open Science Tip</p>
+
+  <div class="tip-card" id="os-tip-card" data-category="">
+
+    <!-- Category badge -->
+    <div class="tip-category-badge">
+      <span>💡</span><span>Open Science</span>
+    </div>
+
+    <!-- Header: name + optional thumbnail -->
+    <div class="tip-header">
+      <h3 class="tip-name">Loading tip…</h3>
+      <img class="tip-thumb" src="" alt="" style="display:none;" />
+    </div>
+
+    <!-- Tip text -->
+    <p class="tip-text"></p>
+
+    <!-- Footer: learn more link + controls -->
+    <div class="tip-footer">
+      <a class="tip-learn-link" href="#" target="_blank" rel="noopener">
+        <span class="tip-link-label">Learn more</span>
+        <span class="tip-arrow-icon">→</span>
+      </a>
+
+      <div class="tip-controls">
+        <button class="tip-btn" id="tip-btn-prev" title="Previous tip">← Prev</button>
+        <span class="tip-counter" id="tip-counter">— / —</span>
+        <button class="tip-btn" id="tip-btn-next" title="Next tip">Next →</button>
+        <button class="tip-btn" id="tip-btn-shuffle" title="Shuffle tips">🔀</button>
+      </div>
+    </div>
+
+  </div><!-- /.tip-card -->
+
+  <!-- Submit link — points to tips_contribute.qmd and GitHub issue form -->
+  <p class="tip-submit-row">
+    Got a tip to share?
+    <a href="content/tips_contribute.html" target="_blank" rel="noopener">Learn how to contribute</a>
+    or
+    <a href="https://github.com/YOUR-ORG/YOUR-REPO/issues/new?template=submit-a-tip.yml"
+       target="_blank" rel="noopener">submit directly via GitHub →</a>
+  </p>
+
+</div><!-- /.open-sci-tip-wrapper -->
+
+<!-- Load the tip card JS -->
+<script src="_code/tips-card.js"></script>
+```
+
+[![](content/images/dashboard-click-here-button.png){width="409"}](https://shannonrankin.github.io/open-science-dashboard/content/dashboard.html)

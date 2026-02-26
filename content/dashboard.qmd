@@ -134,7 +134,7 @@ html`
 <div class="dash-header">
   <div class="dash-header-inner">
     <div class="dash-eyebrow">Resource Library</div>
-    <h1 class="dash-title">Examples Dashboard</h1>
+    <h1 class="dash-title">Open Science Tools Dashboard</h1>
     <p class="dash-subtitle">
       Discover community-contributed examples across tools and topics.
       Filter below, or

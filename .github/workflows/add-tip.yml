@@ -1,0 +1,224 @@
+name: "Add Accepted Tip"
+
+# Triggered when the 'tip-accepted' label is applied to an issue
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  add-tip:
+    # Only run when the label applied is exactly 'tip-accepted'
+    if: github.event.label.name == 'tip-accepted'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write       # to commit tips.yaml update
+      issues: write         # to comment on the issue
+
+    steps:
+      # ── 1. Checkout repo ───────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── 2. Set up Python for parsing & YAML manipulation ───
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: pip install pyyaml requests
+
+      # ── 3. Parse issue body and append tip to YAML ─────────
+      - name: Parse issue and append tip
+        id: parse-tip
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_USER: ${{ github.event.issue.user.login }}
+        run: |
+          python3 << 'PYEOF'
+          import os, re, sys, yaml, json, requests, hashlib
+          from datetime import date
+          from pathlib import Path
+
+          issue_body = os.environ['ISSUE_BODY']
+          issue_number = os.environ['ISSUE_NUMBER']
+          issue_user = os.environ['ISSUE_USER']
+
+          def extract_field(label, body):
+              """Extract answer to a GitHub issue form field by its label heading."""
+              pattern = rf'###\s+{re.escape(label)}\s*\n+(.*?)(?=\n###|\Z)'
+              m = re.search(pattern, body, re.DOTALL | re.IGNORECASE)
+              if m:
+                  val = m.group(1).strip()
+                  # GitHub uses '_No response_' for empty optional fields
+                  if val.lower() in ('_no response_', 'none', ''):
+                      return None
+                  return val
+              return None
+
+          # ── Extract fields ──────────────────────────────────
+          tip_name     = extract_field('Tip Name', issue_body)
+          tip_category = extract_field('Category', issue_body)
+          tip_text     = extract_field('Tip Text', issue_body)
+          tip_link     = extract_field('Learn More Link (URL)', issue_body)
+          tip_link_lbl = extract_field('Link Label', issue_body)
+          tip_image    = extract_field('Tip Image URL (optional)', issue_body)
+          tip_contrib  = extract_field('Your Name or Handle (optional)', issue_body)
+
+          # ── Validate required fields ────────────────────────
+          errors = []
+          if not tip_name:     errors.append('Missing: Tip Name')
+          if not tip_category: errors.append('Missing: Category')
+          if not tip_text:     errors.append('Missing: Tip Text')
+          if not tip_link:     errors.append('Missing: Learn More Link')
+
+          if errors:
+              print("PARSE_ERROR=" + ' | '.join(errors))
+              with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+                  f.write(f"parse_error={'|'.join(errors)}\n")
+                  f.write("success=false\n")
+              sys.exit(0)  # Don't fail the action; we'll comment on the issue
+
+          # ── Handle optional image ───────────────────────────
+          image_path = None
+          image_error = None
+
+          if tip_image and tip_image.startswith('http'):
+              MAX_KB = 120
+              MAX_BYTES = MAX_KB * 1024
+              try:
+                  resp = requests.head(tip_image, timeout=10, allow_redirects=True)
+                  content_length = int(resp.headers.get('Content-Length', 0))
+                  if content_length > MAX_BYTES:
+                      image_error = f"Image exceeds {MAX_KB} kB limit ({content_length // 1024} kB). Please reduce the image size and resubmit."
+                  else:
+                      # Download and double-check
+                      img_resp = requests.get(tip_image, timeout=15)
+                      if len(img_resp.content) > MAX_BYTES:
+                          image_error = f"Image exceeds {MAX_KB} kB limit ({len(img_resp.content) // 1024} kB)."
+                      else:
+                          # Save to content/tip-images/
+                          ext = tip_image.split('.')[-1].split('?')[0].lower()
+                          if ext not in ('png', 'jpg', 'jpeg', 'gif', 'webp'):
+                              ext = 'png'
+                          # Use a hash of the URL for a stable filename
+                          fname = hashlib.md5(tip_image.encode()).hexdigest()[:10] + '.' + ext
+                          out_dir = Path('content/tip-images')
+                          out_dir.mkdir(parents=True, exist_ok=True)
+                          out_path = out_dir / fname
+                          out_path.write_bytes(img_resp.content)
+                          image_path = f"content/tip-images/{fname}"
+                          print(f"Image saved to {image_path}")
+              except Exception as e:
+                  image_error = f"Could not retrieve image: {e}"
+
+          # ── Build tip ID ────────────────────────────────────
+          tips_file = Path('_code/tips.yaml')
+          existing = yaml.safe_load(tips_file.read_text()) or {'tips': []}
+          existing_tips = existing.get('tips', [])
+          new_id = f"tip-{len(existing_tips) + 1:03d}"
+
+          # ── Build tip entry ─────────────────────────────────
+          new_tip = {
+              'id':           new_id,
+              'name':         tip_name,
+              'category':     tip_category,
+              'text':         tip_text,
+              'link':         tip_link,
+              'link_label':   tip_link_lbl or 'Learn more',
+              'image':        image_path,
+              'contributor':  tip_contrib or issue_user,
+              'date_added':   str(date.today()),
+              'issue_number': int(issue_number),
+          }
+
+          existing_tips.append(new_tip)
+          existing['tips'] = existing_tips
+
+          tips_file.write_text(yaml.dump(existing, allow_unicode=True, sort_keys=False))
+          print(f"Tip '{tip_name}' appended as {new_id}")
+
+          # ── Write outputs ───────────────────────────────────
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write("success=true\n")
+              f.write(f"tip_id={new_id}\n")
+              f.write(f"tip_name={tip_name}\n")
+              if image_error:
+                  f.write(f"image_warning={image_error}\n")
+
+          # Write image error to a separate file for the comment step
+          if image_error:
+              Path('/tmp/image_warning.txt').write_text(image_error)
+
+          PYEOF
+
+      # ── 4. Commit the updated tips.yaml (and any image) ────
+      - name: Commit updated tips.yaml
+        if: steps.parse-tip.outputs.success == 'true'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add _code/tips.yaml content/tip-images/ || true
+          git commit -m "feat: add tip '${{ steps.parse-tip.outputs.tip_name }}' from issue #${{ github.event.issue.number }} [skip ci]"
+          git push
+
+      # ── 5. Comment success on issue ─────────────────────────
+      - name: Comment success on issue
+        if: steps.parse-tip.outputs.success == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const tipId   = '${{ steps.parse-tip.outputs.tip_id }}';
+            const tipName = '${{ steps.parse-tip.outputs.tip_name }}';
+            const fs = require('fs');
+            let imageNote = '';
+            try {
+              imageNote = '\n\n> ⚠️ **Image note:** ' + fs.readFileSync('/tmp/image_warning.txt', 'utf8');
+            } catch {}
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo:  context.repo.repo,
+              issue_number: context.issue.number,
+              body: `✅ **Tip accepted and added!**\n\n` +
+                    `"${tipName}" has been added to \`_code/tips.yaml\` as \`${tipId}\`.\n` +
+                    `The site will re-render and deploy shortly.` +
+                    imageNote
+            });
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo:  context.repo.repo,
+              issue_number: context.issue.number,
+              state: 'closed'
+            });
+
+      # ── 6. Comment parse error on issue ────────────────────
+      - name: Comment parse error on issue
+        if: steps.parse-tip.outputs.success == 'false'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const errors = '${{ steps.parse-tip.outputs.parse_error }}';
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo:  context.repo.repo,
+              issue_number: context.issue.number,
+              body: `❌ **Could not parse this tip submission.**\n\n` +
+                    `The following required fields were missing or unreadable:\n` +
+                    errors.split('|').map(e => `- ${e}`).join('\n') +
+                    `\n\nPlease check the issue body and try re-applying the \`tip-accepted\` label.`
+            });
+
+      # ── 7. Trigger Quarto deploy ────────────────────────────
+      - name: Trigger deploy workflow
+        if: steps.parse-tip.outputs.success == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo:  context.repo.repo,
+              workflow_id: 'deploy.yml',
+              ref: 'main'
+            });

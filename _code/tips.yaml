@@ -1,0 +1,90 @@
+tips:
+  - id: tip-001
+    name: "OSF Preregistration"
+    category: "Preregistration"
+    text: "Preregister your study on the Open Science Framework (OSF) before collecting data. Specify your hypotheses, design, and analysis plan. This separates confirmatory from exploratory research and boosts credibility of your findings."
+    link: "https://help.osf.io/article/158-create-a-preregistration"
+    link_label: "How to preregister on OSF"
+    image: null
+    contributor: "OpenSciTips"
+    date_added: "2025-01-15"
+
+  - id: tip-002
+    name: "FAIR Data Principles"
+    category: "Open Data"
+    text: "Make your data Findable, Accessible, Interoperable, and Reusable (FAIR). Use persistent identifiers like DOIs, add rich metadata, choose open file formats, and apply a clear data license such as CC BY 4.0."
+    link: "https://www.go-fair.org/fair-principles/"
+    link_label: "Learn about FAIR principles"
+    image: null
+    contributor: "OpenSciTips"
+    date_added: "2025-01-15"
+
+  - id: tip-003
+    name: "README for Data"
+    category: "Reproducibility"
+    text: "Every dataset deserves a README. Document variable names and units, data collection methods, file structure, software requirements, and any known quirks. A good README means your future self—and others—can actually use the data."
+    link: "https://cornell.ca1.qualtrics.com/jfe/form/SV_8BP4oE6tT0PH0yz"
+    link_label: "Cornell README template"
+    image: null
+    contributor: "OpenSciTips"
+    date_added: "2025-01-15"
+
+  - id: tip-004
+    name: "Zenodo Archiving"
+    category: "Open Data"
+    text: "Archive your code and data on Zenodo to get a citable DOI. Zenodo integrates with GitHub, making it easy to snapshot releases. Your work becomes permanently citable, discoverable, and credit-giving—even if your GitHub URL changes."
+    link: "https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content"
+    link_label: "GitHub + Zenodo integration guide"
+    image: null
+    contributor: "OpenSciTips"
+    date_added: "2025-01-15"
+
+  - id: tip-005
+    name: "R renv for Reproducibility"
+    category: "Open Tools & Software"
+    text: "Use the {renv} package to create a lockfile that records the exact versions of every R package your project uses. Anyone who runs renv::restore() will get your exact environment—no more 'works on my machine' problems."
+    link: "https://rstudio.github.io/renv/articles/renv.html"
+    link_label: "Getting started with renv"
+    image: null
+    contributor: "OpenSciTips"
+    date_added: "2025-01-15"
+
+  - id: tip-006
+    name: "CONSORT / STROBE Reporting"
+    category: "Transparent Reporting"
+    text: "Use established reporting guidelines like CONSORT (clinical trials) or STROBE (observational studies) to make sure you report everything readers need to evaluate and replicate your work. Many journals now require checklist submission."
+    link: "https://www.equator-network.org/"
+    link_label: "Find your reporting guideline at EQUATOR"
+    image: null
+    contributor: "OpenSciTips"
+    date_added: "2025-01-15"
+
+  - id: tip-007
+    name: "ReproHack Events"
+    category: "Community & Collaboration"
+    text: "Join or host a ReproHack—a one-day event where participants attempt to reproduce results from published papers. It's a fun, low-stakes way to practice reproducibility skills, give authors useful feedback, and build community."
+    link: "https://www.reprohack.org/"
+    link_label: "Find or host a ReproHack"
+    image: null
+    contributor: "OpenSciTips"
+    date_added: "2025-01-15"
+
+  - id: tip-008
+    name: "Registered Reports"
+    category: "Preregistration"
+    text: "Consider submitting a Registered Report: peer review happens before data collection, and acceptance is based on the question and methods—not the outcome. This eliminates publication bias and keeps incentives focused on good science."
+    link: "https://www.cos.io/initiatives/registered-reports"
+    link_label: "What are Registered Reports?"
+    image: null
+    contributor: "OpenSciTips"
+    date_added: "2025-01-15"
+
+  - id: tip-009
+    name: "Open Peer Review"
+    category: "Transparent Reporting"
+    text: "Opt for open peer review when available—where reviews and reviewer identities are published alongside the paper. This increases accountability, improves review quality, and makes the scientific conversation visible to everyone."
+    link: "https://peercommunityin.org/"
+    link_label: "Explore Peer Community In (PCI)"
+    image: null
+    contributor: "OpenSciTips"
+    date_added: "2025-01-15"
