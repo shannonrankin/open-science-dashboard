@@ -35,7 +35,7 @@ jobs:
       - name: Install PyYAML
         run: pip install PyYAML
 
-      # ── 3. Parse issue and append to _code/examples.yaml ────────────────────
+      # ── 3. Parse issue and update the dashboard data ─────────────────────────
       - name: Parse issue and update YAML
         env:
           ISSUE_BODY:   ${{ github.event.issue.body }}
@@ -45,6 +45,7 @@ jobs:
 
       # ── 4. Open a PR with the change ─────────────────────────────────────────
       - name: Create Pull Request
+        id: create-pr
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -59,16 +60,14 @@ jobs:
 
             Before merging, please verify:
 
-            - [ ] The new entry in `_code/examples.yaml` looks correct
+            - [ ] The new entry in `content/examples.yaml` looks correct
                   (title, description, URL, tools, keywords are all accurate)
-            - [ ] If an image URL was provided in the issue, download the image,
-                  rename it to match the `image` field, and commit it to
-                  `content/card-images/` in this branch before merging
+            - [ ] The downloaded image (if supplied) displays correctly, or the
+                  entry correctly falls back to the placeholder
             - [ ] Any new `tools` or `keywords` values are intentional and
                   consistently spelled/capitalised
-            - [ ] If new tools/keywords were added, update the checkboxes in
-                  `_code/example-submission.yml` AND copy it to
-                  `.github/ISSUE_TEMPLATE/example-submission.yml`
+            - [ ] Any approved taxonomy changes in
+                  `content/tools_and_keywords.yml` are intentional
             - [ ] The site renders cleanly locally (`quarto preview`)
 
             Closes #${{ github.event.issue.number }}
@@ -88,7 +87,8 @@ jobs:
               body: [
                 "✅ **Submission approved!**",
                 "",
-                "A pull request has been automatically created to add this example to the dashboard.",
+                "A pull request has been automatically created to add this example to the dashboard:",
+                "${{ steps.create-pr.outputs.pull-request-url }}",
                 "Once the PR is reviewed and merged, the dashboard will be updated on the next site build.",
                 "",
                 "Thank you for contributing! 🎉"

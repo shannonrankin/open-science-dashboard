@@ -58,9 +58,9 @@ examples:
   - id: 2
     title: "NOAA Fisheries PAM Research Compendium Template"
     description: >
-      A research compendium template (a digital archive of for 
+      A research compendium template (a digital archive of for
       the components of a research project)
-      url: "https://sael-swfsc.github.io/PAM_template_ResearchCompendium/"
+    url: "https://sael-swfsc.github.io/PAM_template_ResearchCompendium/"
     tools:
       - community building
       - Website
@@ -72,11 +72,11 @@ examples:
     image: "pam-research-compendium.png"
     author: "NMFS-PAM-SI"
     date_added: "2026-02-24"
-   
+
   - id: 3
     title: "NOAA Fisheries PAM Lab Manual Template"
     description: >
-      A template for developing a Lab Manual for NOAA Fisheries PAM teams. 
+      A template for developing a Lab Manual for NOAA Fisheries PAM teams.
       Output to a website.
     url: "https://github.com/nmfs-ost/PAM_template_lab_manual"
     tools:
@@ -89,7 +89,7 @@ examples:
       - tutorials
     image: "pam-lab-manual-template.png"
     author: "NMFS-PAM-SI"
-    date_added: "2026-02-24"   
+    date_added: "2026-02-24"
   - id: 4
     title: "The Turing Way"
     description: >
