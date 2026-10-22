@@ -28,6 +28,7 @@ library(jsonlite)
 # Update these if you ever reorganise the repository structure.
 #
 #   path_data    — location of examples.yaml, resolved from project root by here()
+#   path_taxonomy — location of the shared allowed tools and keywords
 #   img_folder   — image src prefix as seen by the BROWSER once the site is rendered.
 #                  dashboard.qmd lives in content/, and card-images/ is a sibling
 #                  folder at content/card-images/. Quarto copies both to the same
@@ -37,7 +38,8 @@ library(jsonlite)
 #   img_default  — fallback image used when no image field is set in examples.yaml
 #   submit_url   — GitHub new-issue URL (replace YOUR-ORG/YOUR-REPO before deploying)
 #
-path_data   <- here("_code", "examples.yaml")
+path_data   <- here("content", "examples.yaml")
+path_taxonomy <- here("content", "tools_and_keywords.yml")
 img_folder  <- "card-images"
 img_default <- paste0(img_folder, "/placeholder.svg")
 submit_url  <- paste0(
@@ -48,6 +50,7 @@ submit_url  <- paste0(
 # ── Load examples from YAML ──────────────────────────────────────────────────
 raw      <- read_yaml(path_data)
 examples <- raw$examples
+taxonomy <- read_yaml(path_taxonomy)
 
 # ── Normalise: ensure list fields are always character vectors ────────────────
 `%||%` <- function(x, y) if (is.null(x)) y else x
@@ -80,17 +83,19 @@ examples <- map(examples, function(ex) {
 })
 
 # ── Derive master lists for dropdown menus (sorted, deduped) ─────────────────
-all_tools <- examples |>
+all_tools <- c(taxonomy$tools %||% character(0), examples |>
   map("tools") |>
   unlist() |>
-  discard(~ is.na(.) | . == "") |>
+  discard(~ is.na(.) | . == ""))
+all_tools <- all_tools |>
   unique() |>
   sort()
 
-all_keywords <- examples |>
+all_keywords <- c(taxonomy$keywords %||% character(0), examples |>
   map("keywords") |>
   unlist() |>
-  discard(~ is.na(.) | . == "") |>
+  discard(~ is.na(.) | . == ""))
+all_keywords <- all_keywords |>
   unique() |>
   sort()
 

@@ -71,18 +71,15 @@ body:
       label: "Tool Type(s)"
       description: "What kind of resource is this? Tick all that apply."
       options:
-        - label: "Lab Manual"
-        - label: "Website"
         - label: "Reproducible Reports"
-        - label: "Dashboards"
         - label: "Data Management"
-        - label: "Project Management"
-        - label: "community building"
+        - label: "Code Execution"
+        - label: "Visualisation"
 
   - type: input
     id: tools_new
     attributes:
-      label: "New Tool Type(s) — not in the list above?"
+      label: "Suggested New Tools (if not listed above)"
       description: "Comma-separated. Leave blank if not applicable."
       placeholder: "e.g., Podcast, Interactive Tutorial"
 
@@ -92,17 +89,17 @@ body:
       label: "Keyword(s)"
       description: "What topics or technologies does this example feature? Tick all that apply."
       options:
-        - label: "visualizations"
-        - label: "GitHub"
-        - label: "python"
         - label: "r"
-        - label: "cloud"
-        - label: "template"
+        - label: "python"
+        - label: "github"
+        - label: "quarto"
+        - label: "docker"
+        - label: "open-access"
 
   - type: input
     id: keywords_new
     attributes:
-      label: "New Keyword(s) — not in the list above?"
+      label: "Suggested New Keywords (if not listed above)"
       description: "Comma-separated. Leave blank if not applicable."
       placeholder: "e.g., machine learning, open data, docker"
 

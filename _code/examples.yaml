@@ -60,7 +60,7 @@ examples:
     description: >
       A research compendium template (a digital archive of for 
       the components of a research project)
-      url: "https://sael-swfsc.github.io/PAM_template_ResearchCompendium/"
+    url: "https://sael-swfsc.github.io/PAM_template_ResearchCompendium/"
     tools:
       - community building
       - Website

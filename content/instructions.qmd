@@ -28,17 +28,13 @@ your-repo/
 │
 ├── dashboard.css                         ← All dashboard styling (root level)
 │
-├── _code/
-│   ├── examples.yaml                     ← Single source of truth for all examples
-│   ├── example-submission.yml            ← Reference copy of the issue form template
-│   ├── process_submission.yml            ← Reference copy of the GitHub Action workflow
-│   └── parse_submission.py               ← Reference copy of the parser script
-│
 ├── content/
 │   ├── dashboard.qmd                     ← Main dashboard page
 │   ├── instructions.qmd                  ← This guide
+│   ├── examples.yaml                     ← Single source of truth for all examples
+│   ├── tools_and_keywords.yml            ← Shared tool and keyword options
 │   └── card-images/                      ← Thumbnail/screenshot images
-│       ├── placeholder.svg               ← Fallback shown when no image is set
+│       ├── placeholder.drawio.svg        ← Fallback shown when no image is set
 │       └── my-example.png                ← One image file per example
 │
 └── .github/
@@ -50,7 +46,7 @@ your-repo/
         └── parse_submission.py           ← Called by the Action at runtime
 ```
 
-> **`_code/` vs `.github/`:** The files in `_code/` are your **editable source copies** — edit them there, then copy the relevant files to their `.github/` locations so GitHub can find them. See the [Keeping copies in sync](#keeping-copies-in-sync) section below.
+> The dashboard data lives in `content/`; the issue form, workflow, and parser live in `.github/`, where GitHub executes them.
 
 ---
 
@@ -65,7 +61,7 @@ organisation and repository name:
 
 ```r
 # ── PATH CONFIGURATION ───────────────────────────────────────────────────────
-path_data        <- here("_code", "examples.yaml")
+path_data        <- here("content", "examples.yaml")
 path_images      <- "card-images"
 path_placeholder <- "card-images/placeholder.svg"
 submit_url       <- paste0(
@@ -131,7 +127,7 @@ update the live site.
 
 ### The YAML file
 
-All examples live in **`_code/examples.yaml`**. Each entry is one card on
+All examples live in **`content/examples.yaml`**. Each entry is one card on
 the dashboard. The file begins with a detailed comment header — read it before
 making edits.
 
@@ -180,7 +176,7 @@ comma-separated values in quotes. Each tool or keyword is its own indented
 
 ### Adding an example manually
 
-1. Open `_code/examples.yaml` in RStudio or any text editor.
+1. Open `content/examples.yaml` in RStudio or any text editor.
 2. Copy an existing entry block and paste it at the bottom of the `examples:` list.
 3. Increment `id` by 1 from the previous last entry.
 4. Fill in the fields.
@@ -192,22 +188,23 @@ comma-separated values in quotes. Each tool or keyword is its own indented
 
 ### Adding or modifying Tools and Keywords
 
-Tools and keywords **do not need to be registered anywhere** — the dashboard
-derives its dropdown options automatically from all values present in
-`_code/examples.yaml` at render time.
+The approved default tools and keywords live in
+**`content/tools_and_keywords.yml`**. The dashboard also includes unique values
+already present in `content/examples.yaml`, which preserves existing entries.
 
-To **add** a new tool or keyword: use it in a new (or existing) entry.
-It will appear in the dropdown on the next render.
+To **add** an approved tool or keyword, add it to
+`content/tools_and_keywords.yml`. It will appear in the dropdown on the next
+render.
 
-To **remove** a tool or keyword from the dropdowns: remove it from every entry
-that uses it.
+To **remove** a tool or keyword from the dropdowns, remove it from both the
+taxonomy file and every example that uses it.
 
-To **rename** a tool or keyword: do a find-and-replace across `_code/examples.yaml`.
+To **rename** a tool or keyword, update the taxonomy file and do a
+find-and-replace across `content/examples.yaml`.
 
-The current default values are listed in the GitHub issue form template
-(`_code/example-submission.yml` / `.github/ISSUE_TEMPLATE/example-submission.yml`)
-— update **both copies** when you add new official tools or keywords so
-submitters see the full list.
+The current default values are listed in
+`.github/ISSUE_TEMPLATE/example-submission.yml`; update it when approved
+taxonomy values change so submitters see the full list.
 
 ---
 
@@ -227,11 +224,11 @@ submitters see the full list.
        ↓
    GitHub Action fires automatically:
      a. Parses the issue form body
-     b. Appends a new entry to _code/examples.yaml
+     b. Appends a new entry to content/examples.yaml
      c. Opens a Pull Request on a branch named example/issue-N
 
 5. Admin reviews the PR:
-     a. Checks the new YAML entry in _code/examples.yaml looks correct
+     a. Checks the new YAML entry in content/examples.yaml looks correct
      b. Downloads any submitted image → saves to content/card-images/
      c. Verifies any new tool/keyword values are intentional
      d. Runs quarto preview locally (optional but recommended)
@@ -280,7 +277,7 @@ This allows the Action to commit to the repository and open PRs using
 4. If you approve it, add the **`approved`** label. The Action will run within ~1 minute.
 5. Check the **Actions** tab to confirm the workflow completed successfully.
 6. Find the new PR (it's linked in a comment automatically posted to the issue).
-7. In the PR, review `_code/examples.yaml` in the diff.
+7. In the PR, review `content/examples.yaml` in the diff.
 8. If the submitter provided an image URL:
    - Download the image.
    - Rename it to match the `image` field in the new YAML entry.
@@ -295,41 +292,11 @@ This allows the Action to commit to the repository and open PRs using
 If you prefer not to use the Action, or if something fails:
 
 1. Read the issue carefully and extract the submitted values.
-2. Open `_code/examples.yaml` and manually append a new entry.
+2. Open `content/examples.yaml` and manually append a new entry.
 3. If an image was provided, download it to `content/card-images/`.
 4. Commit, push, re-render.
 
 ---
-
-### Keeping copies in sync {#keeping-copies-in-sync}
-
-The files in `_code/` are your **source of record** — the copies you edit
-in RStudio alongside your other project files. The `.github/` copies are
-what GitHub actually reads and executes.
-
-**When you edit `_code/example-submission.yml`** (e.g. to add new tools or
-keywords to the form checkboxes), copy it to `.github/ISSUE_TEMPLATE/`:
-
-```bash
-cp _code/example-submission.yml .github/ISSUE_TEMPLATE/example-submission.yml
-```
-
-**When you edit `_code/process_submission.yml`** (e.g. to change Action
-behaviour), copy it to `.github/workflows/`:
-
-```bash
-cp _code/process_submission.yml .github/workflows/process_submission.yml
-```
-
-**`_code/parse_submission.py`** is the script actually called by the Action
-(via `.github/scripts/parse_submission.py`). Keep these in sync the same way:
-
-```bash
-cp _code/parse_submission.py .github/scripts/parse_submission.py
-```
-
-> **Tip:** You can automate these copies with a short shell script or a
-> pre-commit hook if you find yourself editing these files frequently.
 
 ### Local render and preview
 
@@ -438,23 +405,23 @@ const kwMatch =
 
 ### Adding a new field to cards
 
-1. Add the new field to entries in `_code/examples.yaml`.
+1. Add the new field to entries in `content/examples.yaml`.
 2. In the R chunk in `content/dashboard.qmd`, add the field to the `map_dfr()` tibble.
 3. In the OJS `cards` cell, reference `ex.your_field` inside `renderCard()`.
 
 ### Updating the issue form when tools/keywords change
 
-When you add new official tools or keywords to `_code/examples.yaml`, also add them
-to the checkboxes in `_code/example-submission.yml`, then copy that file to
-`.github/ISSUE_TEMPLATE/example-submission.yml` so submitters see the full list.
+When you add new official tools or keywords to `content/tools_and_keywords.yml`,
+also add them to the checkboxes in `.github/ISSUE_TEMPLATE/example-submission.yml`
+so submitters see the full list.
 
 ---
 
 ## Troubleshooting
 
 **Dashboard shows no examples / blank page**
-: Confirm `_code/examples.yaml` exists and is valid YAML (no tab characters —
-use spaces). Run `yaml::read_yaml(here("_code", "examples.yaml"))` in R to check.
+: Confirm `content/examples.yaml` exists and is valid YAML (no tab characters —
+use spaces). Run `yaml::read_yaml(here("content", "examples.yaml"))` in R to check.
 Verify the `here()` path in the PATH CONFIGURATION block resolves correctly
 from your project root.
 
@@ -465,8 +432,8 @@ falls back to the placeholder on load failure — open your browser's DevTools
 console to see the actual 404 URL.
 
 **New tools/keywords not appearing in dropdowns**
-: The dropdowns are built from the data at render time. Re-render after editing
-`_code/examples.yaml`.
+: The dropdowns are built from the taxonomy and example data at render time.
+Re-render after editing `content/tools_and_keywords.yml` or `content/examples.yaml`.
 
 **GitHub Action not firing on "approved" label**
 : Check the label name is spelled exactly `approved` (case-sensitive).
@@ -477,12 +444,7 @@ Check the Actions tab for errors. Confirm workflow permissions are set to
 : GitHub renders issue form fields as `### Field Label\n\nvalue`. If GitHub
 changes this format, the regex in the script may need updating. Print
 `ISSUE_BODY` in the Action's logs to inspect the raw text, then adjust
-the `extract_field()` patterns in `_code/parse_submission.py`, and copy
-the updated file to `.github/scripts/parse_submission.py`.
-
-**`_code/` and `.github/` copies are out of sync**
-: If the Action is behaving unexpectedly, check whether you edited `_code/`
-but forgot to copy to `.github/`. See the [Keeping copies in sync](#keeping-copies-in-sync) section.
+the `extract_field()` patterns in `.github/scripts/parse_submission.py`.
 
 **`renv` doesn't include the `yaml` package**
 : Run `install.packages("yaml")` then `renv::snapshot()` to capture it.
