@@ -2,17 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>Dashboard Setup &amp; Maintenance Guide – NOAA quarto simple</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -64,22 +70,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../content/dashboard-givingBack.html" rel="prev">
 <link href="../images/favicon.ico" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9b24b7aa4dada73b2f1a005fa628a955.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-955dab038907d35f91c148f97680b2a0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-9b24b7aa4dada73b2f1a005fa628a955.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-f1f35c6febc2e7fd84b6d4f0247c7521.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-c416f5c2c4a43df041981ab9af96a5e6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-f1f35c6febc2e7fd84b6d4f0247c7521.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -285,7 +291,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Dashboard Setup &amp; Maintenance Guide</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/instructions.html">How To</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -336,7 +342,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/Instructions.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../content/instructions.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">How To</span></a>
   </div>
 </li>
@@ -373,7 +379,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#setting-up-the-github-action-one-time" id="toc-setting-up-the-github-action-one-time" class="nav-link" data-scroll-target="#setting-up-the-github-action-one-time">Setting up the GitHub Action (one-time)</a></li>
   <li><a href="#reviewing-and-approving-a-submission-admin-steps" id="toc-reviewing-and-approving-a-submission-admin-steps" class="nav-link" data-scroll-target="#reviewing-and-approving-a-submission-admin-steps">Reviewing and approving a submission (admin steps)</a></li>
   <li><a href="#manual-fallback-no-github-action" id="toc-manual-fallback-no-github-action" class="nav-link" data-scroll-target="#manual-fallback-no-github-action">Manual fallback (no GitHub Action)</a></li>
-  <li><a href="#keeping-copies-in-sync" id="toc-keeping-copies-in-sync" class="nav-link" data-scroll-target="#keeping-copies-in-sync">Keeping copies in sync</a></li>
   <li><a href="#local-render-and-preview" id="toc-local-render-and-preview" class="nav-link" data-scroll-target="#local-render-and-preview">Local render and preview</a></li>
   <li><a href="#deploying-to-github-pages" id="toc-deploying-to-github-pages" class="nav-link" data-scroll-target="#deploying-to-github-pages">Deploying to GitHub Pages</a></li>
   <li><a href="#automating-renders-with-a-github-action-optional" id="toc-automating-renders-with-a-github-action-optional" class="nav-link" data-scroll-target="#automating-renders-with-a-github-action-optional">Automating renders with a GitHub Action (optional)</a></li>
@@ -424,17 +429,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 │
 ├── dashboard.css                         ← All dashboard styling (root level)
 │
-├── _code/
-│   ├── examples.yaml                     ← Single source of truth for all examples
-│   ├── example-submission.yml            ← Reference copy of the issue form template
-│   ├── process_submission.yml            ← Reference copy of the GitHub Action workflow
-│   └── parse_submission.py               ← Reference copy of the parser script
-│
 ├── content/
 │   ├── dashboard.qmd                     ← Main dashboard page
 │   ├── instructions.qmd                  ← This guide
+│   ├── examples.yaml                     ← Single source of truth for all examples
+│   ├── tools_and_keywords.yml            ← Shared tool and keyword options
 │   └── card-images/                      ← Thumbnail/screenshot images
-│       ├── placeholder.svg               ← Fallback shown when no image is set
+│       ├── placeholder.drawio.svg        ← Fallback shown when no image is set
 │       └── my-example.png                ← One image file per example
 │
 └── .github/
@@ -445,7 +446,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     └── scripts/
         └── parse_submission.py           ← Called by the Action at runtime</code></pre>
 <blockquote class="blockquote">
-<p><strong><code>_code/</code> vs <code>.github/</code>:</strong> The files in <code>_code/</code> are your <strong>editable source copies</strong> — edit them there, then copy the relevant files to their <code>.github/</code> locations so GitHub can find them. See the <a href="#keeping-copies-in-sync">Keeping copies in sync</a> section below.</p>
+<p>The dashboard data lives in <code>content/</code>; the issue form, workflow, and parser live in <code>.github/</code>, where GitHub executes them.</p>
 </blockquote>
 <hr>
 </section>
@@ -455,7 +456,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="step-1-update-the-submit-url-and-confirm-paths">Step 1 — Update the submit URL and confirm paths</h3>
 <p><code>dashboard.qmd</code> has a <strong>PATH CONFIGURATION block</strong> near the top of its R chunk. This is the single place to update if you ever reorganise the repository. Before deploying, replace <code>YOUR-ORG/YOUR-REPO</code> with your actual GitHub organisation and repository name:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ── PATH CONFIGURATION ───────────────────────────────────────────────────────</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>path_data        <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"_code"</span>, <span class="st">"examples.yaml"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>path_data        <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"content"</span>, <span class="st">"examples.yaml"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>path_images      <span class="ot">&lt;-</span> <span class="st">"card-images"</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>path_placeholder <span class="ot">&lt;-</span> <span class="st">"card-images/placeholder.svg"</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>submit_url       <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
@@ -506,7 +507,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="managing-the-examples-data">Managing the Examples Data</h2>
 <section id="the-yaml-file" class="level3">
 <h3 class="anchored" data-anchor-id="the-yaml-file">The YAML file</h3>
-<p>All examples live in <strong><code>_code/examples.yaml</code></strong>. Each entry is one card on the dashboard. The file begins with a detailed comment header — read it before making edits.</p>
+<p>All examples live in <strong><code>content/examples.yaml</code></strong>. Each entry is one card on the dashboard. The file begins with a detailed comment header — read it before making edits.</p>
 <section id="field-reference" class="level4">
 <h4 class="anchored" data-anchor-id="field-reference">Field reference</h4>
 <table class="caption-top table">
@@ -610,7 +611,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="adding-an-example-manually" class="level3">
 <h3 class="anchored" data-anchor-id="adding-an-example-manually">Adding an example manually</h3>
 <ol type="1">
-<li>Open <code>_code/examples.yaml</code> in RStudio or any text editor.</li>
+<li>Open <code>content/examples.yaml</code> in RStudio or any text editor.</li>
 <li>Copy an existing entry block and paste it at the bottom of the <code>examples:</code> list.</li>
 <li>Increment <code>id</code> by 1 from the previous last entry.</li>
 <li>Fill in the fields.</li>
@@ -622,11 +623,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="adding-or-modifying-tools-and-keywords" class="level3">
 <h3 class="anchored" data-anchor-id="adding-or-modifying-tools-and-keywords">Adding or modifying Tools and Keywords</h3>
-<p>Tools and keywords <strong>do not need to be registered anywhere</strong> — the dashboard derives its dropdown options automatically from all values present in <code>_code/examples.yaml</code> at render time.</p>
-<p>To <strong>add</strong> a new tool or keyword: use it in a new (or existing) entry. It will appear in the dropdown on the next render.</p>
-<p>To <strong>remove</strong> a tool or keyword from the dropdowns: remove it from every entry that uses it.</p>
-<p>To <strong>rename</strong> a tool or keyword: do a find-and-replace across <code>_code/examples.yaml</code>.</p>
-<p>The current default values are listed in the GitHub issue form template (<code>_code/example-submission.yml</code> / <code>.github/ISSUE_TEMPLATE/example-submission.yml</code>) — update <strong>both copies</strong> when you add new official tools or keywords so submitters see the full list.</p>
+<p>The approved default tools and keywords live in <strong><code>content/tools_and_keywords.yml</code></strong>. The dashboard also includes unique values already present in <code>content/examples.yaml</code>, which preserves existing entries.</p>
+<p>To <strong>add</strong> an approved tool or keyword, add it to <code>content/tools_and_keywords.yml</code>. It will appear in the dropdown on the next render.</p>
+<p>To <strong>remove</strong> a tool or keyword from the dropdowns, remove it from both the taxonomy file and every example that uses it.</p>
+<p>To <strong>rename</strong> a tool or keyword, update the taxonomy file and do a find-and-replace across <code>content/examples.yaml</code>.</p>
+<p>The current default values are listed in <code>.github/ISSUE_TEMPLATE/example-submission.yml</code>; update it when approved taxonomy values change so submitters see the full list.</p>
 <hr>
 </section>
 </section>
@@ -645,11 +646,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
        ↓
    GitHub Action fires automatically:
      a. Parses the issue form body
-     b. Appends a new entry to _code/examples.yaml
+     b. Appends a new entry to content/examples.yaml
      c. Opens a Pull Request on a branch named example/issue-N
 
 5. Admin reviews the PR:
-     a. Checks the new YAML entry in _code/examples.yaml looks correct
+     a. Checks the new YAML entry in content/examples.yaml looks correct
      b. Downloads any submitted image → saves to content/card-images/
      c. Verifies any new tool/keyword values are intentional
      d. Runs quarto preview locally (optional but recommended)
@@ -720,7 +721,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>If you approve it, add the <strong><code>approved</code></strong> label. The Action will run within ~1 minute.</li>
 <li>Check the <strong>Actions</strong> tab to confirm the workflow completed successfully.</li>
 <li>Find the new PR (it’s linked in a comment automatically posted to the issue).</li>
-<li>In the PR, review <code>_code/examples.yaml</code> in the diff.</li>
+<li>In the PR, review <code>content/examples.yaml</code> in the diff.</li>
 <li>If the submitter provided an image URL:
 <ul>
 <li>Download the image.</li>
@@ -737,77 +738,64 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>If you prefer not to use the Action, or if something fails:</p>
 <ol type="1">
 <li>Read the issue carefully and extract the submitted values.</li>
-<li>Open <code>_code/examples.yaml</code> and manually append a new entry.</li>
+<li>Open <code>content/examples.yaml</code> and manually append a new entry.</li>
 <li>If an image was provided, download it to <code>content/card-images/</code>.</li>
 <li>Commit, push, re-render.</li>
 </ol>
 <hr>
 </section>
-<section id="keeping-copies-in-sync" class="level3">
-<h3 class="anchored" data-anchor-id="keeping-copies-in-sync">Keeping copies in sync</h3>
-<p>The files in <code>_code/</code> are your <strong>source of record</strong> — the copies you edit in RStudio alongside your other project files. The <code>.github/</code> copies are what GitHub actually reads and executes.</p>
-<p><strong>When you edit <code>_code/example-submission.yml</code></strong> (e.g.&nbsp;to add new tools or keywords to the form checkboxes), copy it to <code>.github/ISSUE_TEMPLATE/</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> _code/example-submission.yml .github/ISSUE_TEMPLATE/example-submission.yml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>When you edit <code>_code/process_submission.yml</code></strong> (e.g.&nbsp;to change Action behaviour), copy it to <code>.github/workflows/</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> _code/process_submission.yml .github/workflows/process_submission.yml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong><code>_code/parse_submission.py</code></strong> is the script actually called by the Action (via <code>.github/scripts/parse_submission.py</code>). Keep these in sync the same way:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> _code/parse_submission.py .github/scripts/parse_submission.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<blockquote class="blockquote">
-<p><strong>Tip:</strong> You can automate these copies with a short shell script or a pre-commit hook if you find yourself editing these files frequently.</p>
-</blockquote>
-</section>
 <section id="local-render-and-preview" class="level3">
 <h3 class="anchored" data-anchor-id="local-render-and-preview">Local render and preview</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In your project directory (or use RStudio's Render button):</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Live preview in browser with hot reload:</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In your project directory (or use RStudio's Render button):</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Live preview in browser with hot reload:</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="deploying-to-github-pages" class="level3">
 <h3 class="anchored" data-anchor-id="deploying-to-github-pages">Deploying to GitHub Pages</h3>
 <p>The standard workflow after any content update:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render          <span class="co"># rebuilds docs/</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add docs/</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"render: update dashboard"</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render          <span class="co"># rebuilds docs/</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add docs/</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"render: update dashboard"</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>GitHub Pages will serve the updated <code>docs/</code> automatically within ~30 seconds.</p>
 </section>
 <section id="automating-renders-with-a-github-action-optional" class="level3">
 <h3 class="anchored" data-anchor-id="automating-renders-with-a-github-action-optional">Automating renders with a GitHub Action (optional)</h3>
 <p>Add a second workflow to render the site automatically on every push to <code>main</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># .github/workflows/render-site.yml</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Render and Deploy Site</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">build-deploy</span><span class="kw">:</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> r-lib/actions/setup-r@v2</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">use-public-rspm</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> r-lib/actions/setup-r-dependencies@v2</span></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="fu">          packages</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>            any::tidyverse</span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>            any::here</span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>            any::yaml</span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>            any::jsonlite</span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> quarto-dev/quarto-actions/setup@v2</span></span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Render site</span></span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> quarto render</span></span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> JamesIves/github-pages-deploy-action@v4</span></span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">folder</span><span class="kw">:</span><span class="at"> docs</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># .github/workflows/render-site.yml</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Render and Deploy Site</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">build-deploy</span><span class="kw">:</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> r-lib/actions/setup-r@v2</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">use-public-rspm</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> r-lib/actions/setup-r-dependencies@v2</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="fu">          packages</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>            any::tidyverse</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>            any::here</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>            any::yaml</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>            any::jsonlite</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> quarto-dev/quarto-actions/setup@v2</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Render site</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> quarto render</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> JamesIves/github-pages-deploy-action@v4</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">folder</span><span class="kw">:</span><span class="at"> docs</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <hr>
 </section>
 </section>
@@ -816,40 +804,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="theme-colours-and-fonts" class="level3">
 <h3 class="anchored" data-anchor-id="theme-colours-and-fonts">Theme colours and fonts</h3>
 <p>All visual tokens are CSS custom properties at the top of <code>dashboard.css</code> (in the root directory). Change these to retheme the entire dashboard:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">--ink</span><span class="ch">:</span>        <span class="cn">#1a1410</span><span class="op">;</span>   <span class="co">/* primary text */</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">--ivory</span><span class="ch">:</span>      <span class="cn">#f7f3ec</span><span class="op">;</span>   <span class="co">/* page background */</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">--terra</span><span class="ch">:</span>      <span class="cn">#c4583a</span><span class="op">;</span>   <span class="co">/* tool tag accent */</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">--teal</span><span class="ch">:</span>       <span class="cn">#2a6b6e</span><span class="op">;</span>   <span class="co">/* keyword tag accent */</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">--serif</span><span class="ch">:</span>      <span class="st">"Fraunces"</span><span class="op">,</span> <span class="dv">Georgia</span><span class="op">,</span> <span class="dv">serif</span><span class="op">;</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">--sans</span><span class="ch">:</span>       <span class="st">"DM Sans"</span><span class="op">,</span> <span class="dv">system-ui</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="va">--mono</span><span class="ch">:</span>       <span class="st">"DM Mono"</span><span class="op">,</span> <span class="dv">monospace</span><span class="op">;</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">--ink</span><span class="ch">:</span>        <span class="cn">#1a1410</span><span class="op">;</span>   <span class="co">/* primary text */</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">--ivory</span><span class="ch">:</span>      <span class="cn">#f7f3ec</span><span class="op">;</span>   <span class="co">/* page background */</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">--terra</span><span class="ch">:</span>      <span class="cn">#c4583a</span><span class="op">;</span>   <span class="co">/* tool tag accent */</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">--teal</span><span class="ch">:</span>       <span class="cn">#2a6b6e</span><span class="op">;</span>   <span class="co">/* keyword tag accent */</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">--serif</span><span class="ch">:</span>      <span class="st">"Fraunces"</span><span class="op">,</span> <span class="dv">Georgia</span><span class="op">,</span> <span class="dv">serif</span><span class="op">;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">--sans</span><span class="ch">:</span>       <span class="st">"DM Sans"</span><span class="op">,</span> <span class="dv">system-ui</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="va">--mono</span><span class="ch">:</span>       <span class="st">"DM Mono"</span><span class="op">,</span> <span class="dv">monospace</span><span class="op">;</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>To swap fonts: update the Google Fonts <code>&lt;link&gt;</code> tag in the <code>include-in-header</code> section of <code>content/dashboard.qmd</code>, and update the <code>--serif</code>/<code>--sans</code>/<code>--mono</code> variables in <code>dashboard.css</code>.</p>
 </section>
 <section id="changing-filter-logic-or-and" class="level3">
 <h3 class="anchored" data-anchor-id="changing-filter-logic-or-and">Changing filter logic (OR → AND)</h3>
 <p>By default, selecting multiple tools uses <strong>OR logic</strong>: a card appears if it matches <em>any</em> selected tool. To require <em>all</em> selected tools to match (AND logic), edit the <code>filtering</code> OJS cell in <code>content/dashboard.qmd</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Change .some() to .every() for AND logic:</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> toolMatch <span class="op">=</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  selectedTools<span class="op">.</span><span class="at">length</span> <span class="op">===</span> <span class="dv">0</span> <span class="op">||</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  selectedTools<span class="op">.</span><span class="fu">every</span>(t <span class="kw">=&gt;</span> exTools<span class="op">.</span><span class="fu">includes</span>(t))   <span class="co">// ← every, not some</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> kwMatch <span class="op">=</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  selectedKeywords<span class="op">.</span><span class="at">length</span> <span class="op">===</span> <span class="dv">0</span> <span class="op">||</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  selectedKeywords<span class="op">.</span><span class="fu">every</span>(k <span class="kw">=&gt;</span> exKws<span class="op">.</span><span class="fu">includes</span>(k))  <span class="co">// ← every, not some</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Change .some() to .every() for AND logic:</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> toolMatch <span class="op">=</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  selectedTools<span class="op">.</span><span class="at">length</span> <span class="op">===</span> <span class="dv">0</span> <span class="op">||</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  selectedTools<span class="op">.</span><span class="fu">every</span>(t <span class="kw">=&gt;</span> exTools<span class="op">.</span><span class="fu">includes</span>(t))   <span class="co">// ← every, not some</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> kwMatch <span class="op">=</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  selectedKeywords<span class="op">.</span><span class="at">length</span> <span class="op">===</span> <span class="dv">0</span> <span class="op">||</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  selectedKeywords<span class="op">.</span><span class="fu">every</span>(k <span class="kw">=&gt;</span> exKws<span class="op">.</span><span class="fu">includes</span>(k))  <span class="co">// ← every, not some</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="adding-a-new-field-to-cards" class="level3">
 <h3 class="anchored" data-anchor-id="adding-a-new-field-to-cards">Adding a new field to cards</h3>
 <ol type="1">
-<li>Add the new field to entries in <code>_code/examples.yaml</code>.</li>
+<li>Add the new field to entries in <code>content/examples.yaml</code>.</li>
 <li>In the R chunk in <code>content/dashboard.qmd</code>, add the field to the <code>map_dfr()</code> tibble.</li>
 <li>In the OJS <code>cards</code> cell, reference <code>ex.your_field</code> inside <code>renderCard()</code>.</li>
 </ol>
 </section>
 <section id="updating-the-issue-form-when-toolskeywords-change" class="level3">
 <h3 class="anchored" data-anchor-id="updating-the-issue-form-when-toolskeywords-change">Updating the issue form when tools/keywords change</h3>
-<p>When you add new official tools or keywords to <code>_code/examples.yaml</code>, also add them to the checkboxes in <code>_code/example-submission.yml</code>, then copy that file to <code>.github/ISSUE_TEMPLATE/example-submission.yml</code> so submitters see the full list.</p>
+<p>When you add new official tools or keywords to <code>content/tools_and_keywords.yml</code>, also add them to the checkboxes in <code>.github/ISSUE_TEMPLATE/example-submission.yml</code> so submitters see the full list.</p>
 <hr>
 </section>
 </section>
@@ -858,7 +846,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl>
 <dt><strong>Dashboard shows no examples / blank page</strong></dt>
 <dd>
-Confirm <code>_code/examples.yaml</code> exists and is valid YAML (no tab characters — use spaces). Run <code>yaml::read_yaml(here("_code", "examples.yaml"))</code> in R to check. Verify the <code>here()</code> path in the PATH CONFIGURATION block resolves correctly from your project root.
+Confirm <code>content/examples.yaml</code> exists and is valid YAML (no tab characters — use spaces). Run <code>yaml::read_yaml(here("content", "examples.yaml"))</code> in R to check. Verify the <code>here()</code> path in the PATH CONFIGURATION block resolves correctly from your project root.
 </dd>
 <dt><strong>Images not appearing on cards</strong></dt>
 <dd>
@@ -866,7 +854,7 @@ The filename in the <code>image</code> field must exactly match the file in <cod
 </dd>
 <dt><strong>New tools/keywords not appearing in dropdowns</strong></dt>
 <dd>
-The dropdowns are built from the data at render time. Re-render after editing <code>_code/examples.yaml</code>.
+The dropdowns are built from the taxonomy and example data at render time. Re-render after editing <code>content/tools_and_keywords.yml</code> or <code>content/examples.yaml</code>.
 </dd>
 <dt><strong>GitHub Action not firing on “approved” label</strong></dt>
 <dd>
@@ -874,11 +862,7 @@ Check the label name is spelled exactly <code>approved</code> (case-sensitive). 
 </dd>
 <dt><strong><code>parse_submission.py</code> producing empty or wrong field values</strong></dt>
 <dd>
-GitHub renders issue form fields as <code>### Field Label\n\nvalue</code>. If GitHub changes this format, the regex in the script may need updating. Print <code>ISSUE_BODY</code> in the Action’s logs to inspect the raw text, then adjust the <code>extract_field()</code> patterns in <code>_code/parse_submission.py</code>, and copy the updated file to <code>.github/scripts/parse_submission.py</code>.
-</dd>
-<dt><strong><code>_code/</code> and <code>.github/</code> copies are out of sync</strong></dt>
-<dd>
-If the Action is behaving unexpectedly, check whether you edited <code>_code/</code> but forgot to copy to <code>.github/</code>. See the <a href="#keeping-copies-in-sync">Keeping copies in sync</a> section.
+GitHub renders issue form fields as <code>### Field Label\n\nvalue</code>. If GitHub changes this format, the regex in the script may need updating. Print <code>ISSUE_BODY</code> in the Action’s logs to inspect the raw text, then adjust the <code>extract_field()</code> patterns in <code>.github/scripts/parse_submission.py</code>.
 </dd>
 <dt><strong><code>renv</code> doesn’t include the <code>yaml</code> package</strong></dt>
 <dd>
@@ -1309,6 +1293,15 @@ Run <code>install.packages("yaml")</code> then <code>renv::snapshot()</code> to 
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../content/dashboard-givingBack.html" class="pagination-link" aria-label="Submit Example to Dashboard">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Submit Example to Dashboard</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://github.com/shannonrankin/open-science-dashboard/content/instructions.html</loc>
-    <lastmod>2026-02-26T16:15:36.638Z</lastmod>
+    <loc>https://github.com/shannonrankin/open-science-dashboard/supplement/dashboard_instructions.html</loc>
+    <lastmod>2026-10-22T23:28:36.365Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/shannonrankin/open-science-dashboard/content/dashboard-givingBack.html</loc>
-    <lastmod>2026-02-26T16:15:36.630Z</lastmod>
+    <lastmod>2026-10-22T23:28:36.355Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/shannonrankin/open-science-dashboard/supplement/dashboard_instructions.html</loc>
-    <lastmod>2026-02-26T16:15:36.641Z</lastmod>
+    <loc>https://github.com/shannonrankin/open-science-dashboard/content/instructions.html</loc>
+    <lastmod>2026-10-22T23:28:36.363Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/shannonrankin/open-science-dashboard/index.html</loc>
-    <lastmod>2026-02-26T16:15:36.638Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/shannonrankin/open-science-dashboard/content/dashboard.html</loc>
-    <lastmod>2026-02-26T16:15:36.631Z</lastmod>
+    <lastmod>2026-10-22T23:28:36.364Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/shannonrankin/open-science-dashboard/content/tips_contribute.html</loc>
-    <lastmod>2026-02-26T16:15:36.638Z</lastmod>
+    <lastmod>2026-10-22T23:28:36.363Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/shannonrankin/open-science-dashboard/content/dashboard.html</loc>
+    <lastmod>2026-10-22T23:28:36.355Z</lastmod>
   </url>
 </urlset>
