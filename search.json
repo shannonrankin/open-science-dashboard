@@ -63,6 +63,16 @@
     "text": "If you improve this dashboard template and want to share changes upstream, please open an issue or PR in the original template repository. Suggestions for new default tools/keywords, design improvements, workflow enhancements, and accessibility fixes are all welcome."
   },
   {
+    "objectID": "content/givingBack.html",
+    "href": "content/givingBack.html",
+    "title": "Giving Back",
+    "section": "",
+    "text": "There are several ways to help grow and maintain the Open Science Dashboard. Choose the option that best fits how you would like to contribute.\n\n\nSubmit a New Open Science Tool / Resource\n\n\nGo to the repository’s Issues tab and click New Issue.\nSelect the “Submit a New Dashboard Example” template.\nComplete the structured form:\n\nTitle: Use a clear title for the tool or resource (about 60 characters).\nURL: Provide a direct, public web link.\nDescription: Write a one- to three-sentence summary of what the resource provides.\nTools & Keywords: Select all appropriate options. If a tool or keyword is not listed, enter it in the Suggested New Tools or Suggested New Keywords text box.\nAuthor / Organization: Add your name, team, or the organization that created the resource.\nImage / Screenshot: Drag and drop a thumbnail or screenshot into the markdown text block, or provide an image URL.\n\nSubmit the issue. An admin will review it and, once approved, an automated pull request will add the card to the dashboard.\n\n\n\n\nSubmit a New Open Science Tip\n\n\nGo to the repository’s Issues tab and click New Issue.\nSelect the “Submit an Open Science Tip” template.\nComplete the form:\n\nTip Title: Use a short, action-oriented title.\nCategory: Choose the open science area that best fits the tip.\nTip Summary/Details: Describe the quick tip, best practice, or snippet.\nLearn More Link: Include a stable, publicly accessible resource for readers who want more information.\nAuthor/Credit: Tell us how you would like to be credited.\n\nSubmit the issue for maintainer review. Tips do not need tool or keyword tags.\n\n\n\n\nHelp Review & Maintain (Openscapes Mentors)\n\n\nIf you are an Openscapes mentor interested in reviewing submissions or maintaining the dashboard, open a GitHub Issue using the standard issue form or a general issue.\nTitle the issue “Help Review & Maintain the Open Science Dashboard”.\nBriefly describe your interest, relevant experience, and the types of contributions you would like to help review or maintain.\nA maintainer will follow up to coordinate onboarding and next steps.",
+    "crumbs": [
+      "Submit Example to Dashboard"
+    ]
+  },
+  {
     "objectID": "content/instructions.html",
     "href": "content/instructions.html",
     "title": "Dashboard Setup & Maintenance Guide",
