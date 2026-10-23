@@ -5,6 +5,7 @@ tools:
 - Visualisation
 - New Tool
 - Another Tool
+- Project Management
 keywords:
 - r
 - python
@@ -13,3 +14,6 @@ keywords:
 - docker
 - open-access
 - new-keyword
+- template
+- workflow
+- interactive
