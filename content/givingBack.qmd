@@ -3,4 +3,46 @@ title: "Giving Back"
 format: html
 ---
 
+There are several ways to help grow and maintain the Open Science Dashboard.
+Choose the option that best fits how you would like to contribute.
 
+<details>
+<summary><strong>Submit a New Open Science Tool / Resource</strong></summary>
+
+1. Go to the repository's [**Issues** tab](https://github.com/shannonrankin/open-science-dashboard/issues) and click **New Issue**.
+2. Select the **"Submit a New Dashboard Example"** template.
+3. Complete the structured form:
+   - **Title:** Use a clear title for the tool or resource (about 60 characters).
+   - **URL:** Provide a direct, public web link.
+   - **Description:** Write a one- to three-sentence summary of what the resource provides.
+   - **Tools & Keywords:** Select all appropriate options. If a tool or keyword is not listed, enter it in the *Suggested New Tools* or *Suggested New Keywords* text box.
+   - **Author / Organization:** Add your name, team, or the organization that created the resource.
+   - **Image / Screenshot:** Drag and drop a thumbnail or screenshot into the markdown text block, or provide an image URL.
+4. Submit the issue. An admin will review it and, once approved, an automated pull request will add the card to the dashboard.
+
+</details>
+
+<details>
+<summary><strong>Submit a New Open Science Tip</strong></summary>
+
+1. Go to the repository's [**Issues** tab](https://github.com/shannonrankin/open-science-dashboard/issues) and click **New Issue**.
+2. Select the **"Submit an Open Science Tip"** template.
+3. Complete the form:
+   - **Tip Title:** Use a short, action-oriented title.
+   - **Category:** Choose the open science area that best fits the tip.
+   - **Tip Summary/Details:** Describe the quick tip, best practice, or snippet.
+   - **Learn More Link:** Include a stable, publicly accessible resource for readers who want more information.
+   - **Author/Credit:** Tell us how you would like to be credited.
+4. Submit the issue for maintainer review. Tips do not need tool or keyword tags.
+
+</details>
+
+<details>
+<summary><strong>Help Review & Maintain (Openscapes Mentors)</strong></summary>
+
+1. If you are an Openscapes mentor interested in reviewing submissions or maintaining the dashboard, open a GitHub Issue using the standard issue form or a general issue.
+2. Title the issue **"Help Review & Maintain the Open Science Dashboard"**.
+3. Briefly describe your interest, relevant experience, and the types of contributions you would like to help review or maintain.
+4. A maintainer will follow up to coordinate onboarding and next steps.
+
+</details>
