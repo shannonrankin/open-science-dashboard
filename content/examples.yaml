@@ -184,6 +184,6 @@ examples:
   - template
   - workflow
   - interactive
-  image: ''
+  image: 'p-a-m_logo.jpg'
   author: Shannon Rankin/ NOAA Fisheries
   date_added: '2026-10-23'
