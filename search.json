@@ -63,16 +63,6 @@
     "text": "If you improve this dashboard template and want to share changes upstream, please open an issue or PR in the original template repository. Suggestions for new default tools/keywords, design improvements, workflow enhancements, and accessibility fixes are all welcome."
   },
   {
-    "objectID": "content/dashboard-givingBack.html",
-    "href": "content/dashboard-givingBack.html",
-    "title": "workflow-givingBack",
-    "section": "",
-    "text": "Share your examples and templates for others to access using the Example Dashboard",
-    "crumbs": [
-      "Submit Example to Dashboard"
-    ]
-  },
-  {
     "objectID": "content/instructions.html",
     "href": "content/instructions.html",
     "title": "Dashboard Setup & Maintenance Guide",
