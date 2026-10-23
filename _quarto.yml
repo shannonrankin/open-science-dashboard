@@ -36,7 +36,7 @@ website:
         text: Home
       - href: content/dashboard.qmd
         text: "Open Science Dashboard"
-      - href: content/dashboard-givingBack.qmd
+      - href: content/givingBack.qmd
         text: Submit Example to Dashboard
       - href: content/instructions.qmd
         text: How To
